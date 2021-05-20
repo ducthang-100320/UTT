@@ -1,0 +1,81 @@
+﻿@model IEnumerable<UTTUniversity.Models.tblAccountNhanVien>
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css"
+      href="~/Areas/Admin/assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" type="text/css"
+      href="~/Areas/Admin/assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css">
+<div class="row">
+    <div class="col-12">
+
+        <div class="card">
+            <div class="card-body">
+                @*<h4 class="card-title">Data Table</h4>
+                    <h6 class="card-subtitle">Data table example</h6>*@
+                <div class="table-responsive m-t-40">
+                    <table id="myTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Mã nhân viên</th>
+                                <th>Ảnh</th>
+                                <th>Tên giảng viên</th>
+                                <th>Ngày sinh</th>
+                                <th>Số điện thoại</th>
+                                <th>Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MA_NHANVIEN)
+                                    </td>
+                                    <td>
+                                        <img src=@item.Image class="img-radius mb-1" style="height: 50px; width:50px; border-radius:50%" />
+                                    </td>
+                                    @*<td></td>*@
+                                    <td>
+                                        @item.HO_TEN
+                                    </td>
+
+
+                                    <td>
+                                        @item.NGAY_SINH.ToString("dd/MM/yyyy")
+                                    </td>
+                                    <td>
+                                        @if (item.SO_DIENTHOAI == "")
+                                        {
+                                            <span>Chưa có thông tin</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@item.SO_DIENTHOAI</span>
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script src="~/Content/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>

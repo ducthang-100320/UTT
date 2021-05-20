@@ -1,0 +1,99 @@
+﻿@model UTTUniversity.Models.tblNew
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var lstCate = (List<UTTUniversity.Models.tblCategory>)Session["Category"];
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Thông Tin Chi Tiết</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Chuyên Mục: <span class="label-required"></span></label>
+                    @foreach (var item in lstCate)
+                    {
+                        if (@Model.CateNewsID == item.ID)
+                        {
+                            <td>
+                                @item.CateName
+                            </td>
+                        }
+
+                    }
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Tiêu đề : <span class="label-required"></span></label>
+                    @Model.Title
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Ngày Đăng : <span class="label-required"></span></label>
+                    @Model.PostDate.Value.ToString("dd/MM/yyyy")
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Mô tả ngắn : <span class="label-required"></span></label>
+                    @Model.ShortDescribe
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Loại Tin : <span class="label-required"></span></label>
+                    @*if(@Model.IsHot = 1){
+                        <p>Tin Hot</p>
+                        }
+                        else if(@Model.IsView = 1){
+                        <p>Tin Mới</p>
+                        }
+                        if(@Model.IsComment = 1){
+                        <p>Comment</p>
+                        }
+                        else{
+                        <p>Cho phép</p>
+                        }*@
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Tổng Comment : <span class="label-required"></span></label>
+                    @Model.CommentTotal
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Nội dung : <span class="label-required"></span></label>
+                    @Html.Raw(Model.FullDescribe)
+                </div>
+            </div>
+            @*<div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Ảnh To : <span class="label-required"></span></label><br />
+                        <img src="@Model.ImageLarge" alt="Alternate Text" height="100px" width="300px" />
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Ảnh Nhỏ : <span class="label-required"></span></label><br />
+                        <img src="@Model.ImageThumb" alt="Alternate Text" height="100px" widt="300px  />
+
+                    </div>
+                </div>*@
+
+
+        </div>
+    </div>
+</div>
