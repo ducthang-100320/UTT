@@ -11,7 +11,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
         // GET: Admin/Test2
         public ActionResult Index()
         {
-            stringa;
+            string v;
             return View();
         }
     }
