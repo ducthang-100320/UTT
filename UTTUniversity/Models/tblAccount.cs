@@ -9,25 +9,20 @@ namespace UTTUniversity.Models
     [Table("tblAccount")]
     public partial class tblAccount
     {
-        [Key]
-        [Column(Order = 0)]
         public int ID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        [Required]
         [StringLength(50)]
         public string AccoutName { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        [Required]
         [StringLength(500)]
         public string Password { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DateIssued { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Status { get; set; }
 
         public DateTime? CreatedDate { get; set; }

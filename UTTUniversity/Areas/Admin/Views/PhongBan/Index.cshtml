@@ -1,10 +1,8 @@
-﻿@model IEnumerable<UTTUniversity.Models.tblAccountNhanVien>
+﻿@model IEnumerable<UTTUniversity.Models.tblPhongBan>
 
 @{
-                /**/
-
-                ViewBag.Title = "Index";
-                Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" type="text/css"
@@ -18,7 +16,7 @@
             <div class="card-body">
                 <h4 class="card-title">Danh Sách Nhân Viên</h4>
                 <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><a href="@Url.Action("Create","NhanVien")">Thêm mới</a> </button>
-        @*<h6 class="card-subtitle">Data table example</h6>*@
+                @*<h6 class="card-subtitle">Data table example</h6>*@
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table table-bordered table-striped">
                         <thead>
@@ -79,4 +77,4 @@
 
     </div>
 </div>
-<script src="~/Areas/Admin/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/Content/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>

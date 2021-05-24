@@ -21,6 +21,8 @@ namespace UTTUniversity.Models
         [StringLength(150)]
         public string HO_TEN { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NGAY_SINH { get; set; }
 
         public int GIOI_TINH { get; set; }
@@ -42,9 +44,6 @@ namespace UTTUniversity.Models
 
         [StringLength(250)]
         public string Image { get; set; }
-
-        [StringLength(250)]
-        public string ImageUrl { get; set; }
 
         [Required]
         [StringLength(50)]

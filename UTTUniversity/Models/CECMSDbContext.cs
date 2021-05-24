@@ -8,11 +8,12 @@ namespace UTTUniversity.Models
     public partial class CECMSDbContext : DbContext
     {
         public CECMSDbContext()
-            : base("name=CECMSDbContext")
+            : base("name=CECMSDbContext1")
         {
         }
 
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<tblAccount> tblAccounts { get; set; }
         public virtual DbSet<tblBanner> tblBanners { get; set; }
         public virtual DbSet<tblChiTietMuonTra> tblChiTietMuonTras { get; set; }
         public virtual DbSet<tblChiTietPhieuNhap> tblChiTietPhieuNhaps { get; set; }
@@ -50,7 +51,6 @@ namespace UTTUniversity.Models
         public virtual DbSet<tblThoiKhoaBieu> tblThoiKhoaBieux { get; set; }
         public virtual DbSet<tblTrinhDoHocVan> tblTrinhDoHocVans { get; set; }
         public virtual DbSet<tblVideo> tblVideos { get; set; }
-        public virtual DbSet<tblAccount> tblAccounts { get; set; }
         public virtual DbSet<tblCategory> tblCategories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

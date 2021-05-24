@@ -1,0 +1,79 @@
+﻿@model IEnumerable<UTTUniversity.Models.tblCoSo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@{
+    int STT = 0;
+}
+
+<link rel="stylesheet" type="text/css"
+      href="~/Areas/Admin/assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" type="text/css"
+      href="~/Areas/Admin/assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css">
+<div class="row">
+    <div class="col-12">
+
+        <div class="card">
+            <div class="card-body">
+                @*<h4 class="card-title">Data Table</h4>
+                    <h6 class="card-subtitle">Data table example</h6>*@
+                <div class="table-responsive m-t-40">
+                    <table id="myTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên Cơ Sở</th>
+                                <th>Địa Chỉ</th>
+                                <th>Số điện thoại</th>
+                                <th>FAX</th>
+                                <th>Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                STT ++;
+                                <tr>
+                                    <td>@STT</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TEN_COSO)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DIA_CHI)
+                                    </td>
+
+                                    <td>
+                                        @if (item.SO_DTHOAI == "")
+                                        {
+                                            <span>Chưa có thông tin</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@item.SO_DTHOAI</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FAX)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.MA_COSO }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.MA_COSO }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.MA_COSO })
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script src="~/Areas/Admin/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>

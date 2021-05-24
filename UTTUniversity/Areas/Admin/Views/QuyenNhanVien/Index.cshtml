@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css"
+      href="~/Areas/Admin/assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" type="text/css"
+      href="~/Areas/Admin/assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css">
+
+<link href="~/Areas/Admin/assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
+@{
+    /**/
+
+    var modelQuyen = (IEnumerable<UTTUniversity.Models.tblQuyen>)Session["Role"];
+    var modelNDung = (IEnumerable<UTTUniversity.Models.tblNhanVien>)Session["Teacher"];
+    var modelQuyenND = new List<UTTUniversity.Models.tblNVIEN_QUYEN>();
+
+    if (Session["TeacherRole"] != null)
+    {
+        modelQuyenND = (List<UTTUniversity.Models.tblNVIEN_QUYEN>)Session["TeacherRole"];
+    } }
+
+@using (Html.BeginForm("Index", "QuyenNhanVien", FormMethod.Post))
+{
+    if (modelQuyen != null && modelQuyen.Count() > 0)
+    {
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Phân Quyền - Nhân Viên</h4>
+
+                        <div class="table-responsive m-t-40">
+                            <table id="myTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Tên tài khoản</th>
+                                        @foreach (var itemTable in modelQuyen)
+                                        {
+                                            <th>@Html.DisplayFor(modelItem => itemTable.RoleName)</th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (modelNDung != null)
+                                    {
+                                        foreach (var item in modelNDung)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.HO_TEN)</td>
+                                                @foreach (var itemDetails in modelQuyen)
+                                                {
+                                                    var iCheck = false;
+                                                    <td style="text-align : center">
+                                                        @foreach (var itemCheck in modelQuyenND)
+                                                        {
+                                                            if (itemCheck.RoleID == itemDetails.RoleID && itemCheck.UserID == item.ID)
+                                                            {
+                                                                iCheck = true; break;
+                                                            }
+                                                        }
+                                                        @if (iCheck == true)
+                                                        {
+                                                            <input type="checkbox" onchange="show(this.id)" id="chk_@itemDetails.RoleID _@item.ID" value="true" checked="checked" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="checkbox" onchange="show(this.id)" id="chk_@itemDetails.RoleID _@item.ID" value="false" />
+                                                        }
+                                                    </td>
+                                                }
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+
+}
+<script src="~/Areas/Admin/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+
+<script>
+    $(function () {
+        $('#myTable').DataTable();
+        var table = $('#example').DataTable({
+            "columnDefs": [{
+                "visible": false,
+                "targets": 2
+            }],
+            "order": [
+                [2, 'asc']
+            ],
+            "displayLength": 25,
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({
+                    page: 'current'
+                }).nodes();
+                var last = null;
+                api.column(2, {
+                    page: 'current'
+                }).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                        last = group;
+                    }
+                });
+            }
+        });
+        // Order by the grouping
+        $('#example tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                table.order([2, 'desc']).draw();
+            } else {
+                table.order([2, 'asc']).draw();
+            }
+        });
+        // responsive table
+        $('#config-table').DataTable({
+            responsive: true
+        });
+        $('#example23').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+        $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+    });
+
+</script>
+<script>
+    function show(id) {
+        var chk = document.getElementById(id).checked;
+        var jsData = "{ID:'" + id + "', Choice:'" + chk + "'}";
+        $.ajax({
+            type: "POST",
+            url: "/QuyenNhanVien/SaveData",
+            contentType: "application/json; charset=utf-8",
+            data: jsData,
+            dataType: "json",
+            success: function (chData) {
+                if (chData == "OK") {
+                    SetAlert("Success", "Ghi dữ liệu thành công", "");
+                }
+            }
+        })
+    }
+</script>
+<script type="text/javascript">
+    function SetAlert(type, warningtext, idfocus) {
+        if (type == "success") {
+            window.setTimeout(function () {
+                $.toast({
+                    heading: 'Thông báo',
+                    text: warningtext,
+                    position: 'top-right',
+                    loaderBg: '#e69a2a',
+                    icon: 'success',
+                    hideAfter: 3500,
+                    stack: 6
+                });
+            }, 1000);
+        }
+        else if (type == "warning") {
+            window.setTimeout(function () {
+                $.toast({
+                    heading: 'Cảnh báo',
+                    text: warningtext,
+                    position: 'top-right',
+                    loaderBg: '#f35800',
+                    icon: 'warning',
+                    hideAfter: 3500,
+                    stack: 6
+                });
+            }, 1000);
+        }
+        else {
+            window.setTimeout(function () {
+                $.toast({
+                    heading: 'Thông báo',
+                    text: warningtext,
+                    position: 'top-right',
+                    loaderBg: '#dc4666',
+                    icon: 'danger',
+                    hideAfter: 3500,
+                    stack: 6
+                });
+            }, 1000);
+        }
+        $("#" + idfocus).focus();
+    }
+</script>

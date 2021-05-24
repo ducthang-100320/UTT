@@ -9,6 +9,10 @@
     var lstCate = (List<UTTUniversity.Models.tblCategory>)Session["Category"];
 }
 
+<link rel="stylesheet" type="text/css"
+      href="~/Areas/Admin/assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" type="text/css"
+      href="~/Areas/Admin/assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css">
 <div class="row">
     <div class="col-12">
 
@@ -16,7 +20,7 @@
             <div class="card-body">
                 <div>
                     <h6 class="card-subtitle">Danh sách tin tức</h6>
-                    <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><a href="@Url.Action("Create","TinTuc")">Create New</a> </button>
+                    <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><a href="@Url.Action("Create","TinTuc")">Thêm mới</a> </button>
                 </div>
 
                 <div class="table-responsive m-t-40">
@@ -82,3 +86,4 @@
 
     </div>
 </div>
+<script src="~/Content/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
