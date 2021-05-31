@@ -14,17 +14,16 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Danh Sách Nhân Viên</h4>
-                <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><a href="@Url.Action("Create","NhanVien")">Thêm mới</a> </button>
+                <h4 class="card-title">Danh Sách Phòng Ban</h4>
+                <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><a href="@Url.Action("Create","PhongBan")">Thêm mới</a> </button>
                 @*<h6 class="card-subtitle">Data table example</h6>*@
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Mã nhân viên</th>
-                                <th>Ảnh</th>
-                                <th>Tên giảng viên</th>
-                                <th>Ngày sinh</th>
+                                <th>Mã phòng ban</th>
+                                <th>Tên phòng ban</th>
+                                <th>Địa Chỉ</th>
                                 <th>Số điện thoại</th>
                                 <th>Hành Động</th>
                             </tr>
@@ -33,39 +32,33 @@
                             @foreach (var item in Model)
                             {
 
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MA_NHANVIEN)
-                                    </td>
-                                    <td>
-                                        <img src=@item.Image class="img-radius mb-1" style="height: 50px; width:50px; border-radius:50%" />
-                                    </td>
-                                    @*<td></td>*@
-                                    <td>
-                                        @item.HO_TEN
-                                    </td>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MA_PHONGBAN)
+                                </td>
+                                <td>
+                                    @item.TEN_PHONGBAN
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DIA_CHI)
+                                </td>
+                                <td>
+                                    @if (item.SO_DTHOAI == null)
+                                    {
+                                        <span>Chưa có thông tin</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@item.SO_DTHOAI</span>
+                                    }
+                                </td>
 
-
-                                    <td>
-                                        @item.NGAY_SINH.ToString("dd/MM/yyyy")
-                                    </td>
-                                    <td>
-                                        @if (item.SO_DIENTHOAI == "")
-                                        {
-                                            <span>Chưa có thông tin</span>
-                                        }
-                                        else
-                                        {
-                                            <span>@item.SO_DIENTHOAI</span>
-                                        }
-                                    </td>
-
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                                    </td>
-                                </tr>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.MA_PHONGBAN }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.MA_PHONGBAN }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.MA_PHONGBAN})
+                                </td>
+                            </tr>
 
                             }
                         </tbody>

@@ -27,7 +27,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Hết hiệu lực");
+                    ModelState.AddModelError("", " Tài khoản hết hiệu lực");
                     return View();
                 }
             }

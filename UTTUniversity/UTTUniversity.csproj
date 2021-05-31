@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CoSoDaoTaoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DanhMucController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhenThuongKyLuatController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhoaController.cs" />
@@ -231,6 +232,7 @@
     <Content Include="Areas\Admin\assets\images\users\6.jpg" />
     <Content Include="Areas\Admin\assets\images\users\7.jpg" />
     <Content Include="Areas\Admin\assets\images\users\8.jpg" />
+    <Content Include="Areas\Admin\assets\images\users\avatar.jpg" />
     <Content Include="Areas\Admin\assets\images\users\logo.png" />
     <Content Include="Areas\Admin\assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.css" />
     <Content Include="Areas\Admin\assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.js" />
@@ -1679,6 +1681,12 @@
     <Content Include="Areas\Admin\Views\NhanVien\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\PhongBan\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhMuc\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhMuc\Modal.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhMuc\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhMuc\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhMuc\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
