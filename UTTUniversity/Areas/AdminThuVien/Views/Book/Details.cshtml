@@ -1,0 +1,75 @@
+﻿@model ThuVienTruongHoc.Areas.Admin.Models.tblSach
+@{
+    var lstTacGia = (List<ThuVienTruongHoc.Areas.Admin.Models.tblTacGia>)ViewBag.setcontrolTGia;
+    var lstTLoai = (List<ThuVienTruongHoc.Areas.Admin.Models.tblTheLoaiSach>)ViewBag.setcontrolTLoai;
+    var lstNXB = (List<ThuVienTruongHoc.Areas.Admin.Models.tblNhaXuatBan>)ViewBag.setcontrolNXB;
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle" style="color:red">Thông tin chi tiết</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-4">
+                        <div class="form-group">
+                           
+                            <img src="@Model.IMAGE" alt="user" style="height: 150px; width:141px" />
+                        </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Tên sách: <span class="label-required"></span></label>
+                            @Model.TEN_SACH
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Tác giả: <span class="label-required"></span></label>
+                            @foreach (var item1 in lstTacGia)
+                            {
+                                if (@Model.MA_TACGIA == item1.MA_TACGIA)
+                                {
+                                    <label>@item1.TEN_TACGIA</label>
+                                }
+                            }
+
+                        </div>
+                    </div>
+
+                  
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Nhà xuất bản: <span class="label-required"></span></label>
+                            @foreach (var item2 in lstNXB)
+                            {
+                                if (@Model.MA_NXB == item2.MA_NXB)
+                                {
+                                    <label>@item2.TEN_NXB</label>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Số lượng: <span class="label-required"></span></label>
+                            @Model.SO_LUONG
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Mô tả: <span class="label-required"></span></label>
+                        @Model.MO_TA
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

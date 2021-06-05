@@ -1,0 +1,133 @@
+﻿@model IEnumerable<ThuVienTruongHoc.Areas.Admin.Models.tblDocGia>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@{
+    int STT = 0;
+    var modelTheLoai = (IEnumerable<ThuVienTruongHoc.Areas.Admin.Models.tblLoaiDocGia>)Session["loai"];
+
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Danh mục đọc giả</h4>
+        <div class="table-responsive m-t-40">
+            <table id="myTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã đọc giả</th>
+                        <th>Tên đọc giả</th>
+                        <th>Mã thẻ</th>
+                        <th>Ngày sinh</th>
+                        <th>Loại</th>
+                        <th>Số điện thoại</th>
+                        <th>Tùy chọn</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        STT = STT + 1;
+                    <tr>
+                        <td>
+                            @STT
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MA_DOCGIA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TEN_DOCGIA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MA_THE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NGAY_SINH)
+                        </td>
+                        <td>
+                            @foreach (var itemTloai in modelTheLoai)
+                            {
+                                if (item.MA_LOAI == itemTloai.MA_LOAI)
+                                {
+                                    @Html.DisplayFor(modelItem => itemTloai.TEN_LOAI)
+                                }
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SO_DTHOAI)
+                        </td>
+                        <td>
+                         
+                                    <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "DocGia", new { id = item.ID })">Edit</a>
+                             
+                                    <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "DocGia",new { id = item.ID })')">Details</a>
+                              
+                                    <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "DocGia",new { id = item.ID })">Delete</a>
+                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.RoleID })*@
+                             
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="~/Areas/Admin/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+<script>
+    $(function () {
+        $('#myTable').DataTable();
+        var table = $('#example').DataTable({
+            "columnDefs": [{
+                "visible": false,
+                "targets": 2
+            }],
+            "order": [
+                [2, 'asc']
+            ],
+            "displayLength": 25,
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({
+                    page: 'current'
+                }).nodes();
+                var last = null;
+                api.column(2, {
+                    page: 'current'
+                }).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                        last = group;
+                    }
+                });
+            }
+        });
+        // Order by the grouping
+        $('#example tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                table.order([2, 'desc']).draw();
+            } else {
+                table.order([2, 'asc']).draw();
+            }
+        });
+        // responsive table
+        $('#config-table').DataTable({
+            responsive: true
+        });
+        $('#example23').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+        $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+    });
+
+</script>

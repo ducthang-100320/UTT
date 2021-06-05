@@ -1,0 +1,195 @@
+﻿@model ThuVienTruongHoc.Areas.Admin.Models.tblSach
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var lstTacGia = (List<ThuVienTruongHoc.Areas.Admin.Models.tblTacGia>)ViewBag.setcontrolTGia;
+    var lstTLoai = (List<ThuVienTruongHoc.Areas.Admin.Models.tblTheLoaiSach>)ViewBag.setcontrolTLoai;
+    var lstNXB = (List<ThuVienTruongHoc.Areas.Admin.Models.tblNhaXuatBan>)ViewBag.setcontrolNXB;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <div class="modal-content">
+        <div class="modal-header" style="background-color: dodgerblue">
+            <h5 class="modal-title" id="exampleModalLongTitle">Tạo Mới</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("Edit", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="row p-t-0">
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="input-file-now-custom-1">Ảnh</label>
+                                    <input type="file" name="filePost" class="dropify" value="@Model.IMAGE" src="@Model.IMAGE" data-default-file="@Model.IMAGE" data-allowed-file-extensions='["png", "jpg"]' />
+                                    @Html.HiddenFor(model => model.IMAGE)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Tên sách: <span class="label-required">*</span></label>
+                                    @Html.EditorFor(model => model.TEN_SACH, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TEN_SACH, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Mã Sách: <span class="label-required">*</span></label>
+                                    @Html.EditorFor(model => model.MA_SACH, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MA_SACH, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Số lượng: <span class="label-required">*</span></label>
+                                    @Html.EditorFor(model => model.SO_LUONG, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SO_LUONG, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Tác Giả: <span class="label-required">*</span></label>
+                                    <select id="inputTacGia" class="form-control" name="cboTacGia">
+                                        @if (lstTacGia != null)
+                                        {
+                                            foreach (var itemTacGia in lstTacGia)
+                                            {
+                                                if (Model.MA_TACGIA == itemTacGia.MA_TACGIA)
+                                                {
+                                                    <option value="@itemTacGia.MA_TACGIA" selected>@itemTacGia.TEN_TACGIA</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@itemTacGia.MA_TACGIA">@itemTacGia.TEN_TACGIA</option>
+                                                }
+
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Tên Thể Loại: <span class="label-required">*</span></label>
+                                    <select id="inputTloai" class="form-control" name="cboTLoai">
+                                        @if (lstTLoai != null)
+                                        {
+                                            foreach (var itemTLoai in lstTLoai)
+                                            {
+                                                if (Model.MA_TACGIA == itemTLoai.MA_THELOAI)
+                                                {
+                                                    <option value="@itemTLoai.MA_THELOAI">@itemTLoai.TEN_THELOAI</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@itemTLoai.MA_THELOAI">@itemTLoai.TEN_THELOAI</option>
+                                                }
+
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Nhà Xuất Bản: <span class="label-required">*</span></label>
+                                    <select id="inputNXB" class="form-control" name="cboNXB">
+                                        @if (lstNXB != null)
+                                        {
+                                            foreach (var itemNXB in lstNXB)
+                                            {
+                                                if (Model.MA_NXB == itemNXB.MA_NXB)
+                                                {
+                                                    <option value="@itemNXB.MA_NXB" selected>@itemNXB.TEN_NXB</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@itemNXB.MA_NXB">@itemNXB.TEN_NXB</option>
+                                                }
+
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group" style="margin-top: .5rem;">
+                            <br />
+                            <input type="submit" value="Ghi dữ liệu" class="btn btn-dropbox" />
+                            @Html.ActionLink("Quay lại", "Index")
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="~/Areas/Admin/assets/node_modules/dropify/dist/js/dropify.min.js"></script>
+    <script src="~/Areas/Admin/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Basic
+            $('.dropify').dropify();
+
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
+                }
+            });
+
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+
+            drEvent.on('dropify.beforeClear', function (event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+
+            drEvent.on('dropify.afterClear', function (event, element) {
+                alert('File deleted');
+            });
+
+            drEvent.on('dropify.errors', function (event, element) {
+                console.log('Has Errors');
+            });
+
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function (e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
+        });
+    </script>
+</body>
+</html>
