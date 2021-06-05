@@ -3285,6 +3285,22 @@
     <Content Include="Areas\AdminThuVien\assets\node_modules\summernote\dist\font\summernotec360.woff" />
     <Content Include="Areas\AdminThuVien\Views\Book\Create.cshtml" />
     <Content Include="Areas\AdminThuVien\Views\Book\Details.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\Book\Edit.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\DocGia\Index.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\Home\Index.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\Login\Index.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NXB\Index.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NXB\Create.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NXB\Edit.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NXB\Details.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\TacGia\Index.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\TacGia\Create.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\TacGia\Edit.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\TacGia\Details.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\TheLoaiSach\Index.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\TheLoaiSach\Create.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\TheLoaiSach\Edit.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\TheLoaiSach\Details.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -3314,12 +3330,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminThuVien\Models\" />
-    <Folder Include="Areas\AdminThuVien\Views\DocGia\" />
-    <Folder Include="Areas\AdminThuVien\Views\Home\" />
-    <Folder Include="Areas\AdminThuVien\Views\Login\" />
-    <Folder Include="Areas\AdminThuVien\Views\NXB\" />
-    <Folder Include="Areas\AdminThuVien\Views\TacGia\" />
-    <Folder Include="Areas\AdminThuVien\Views\TheLoaiSach\" />
     <Folder Include="Areas\AdminThuVien\Views\User\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\KhenThuongKyLuat\" />

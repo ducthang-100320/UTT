@@ -1,0 +1,122 @@
+﻿@model IEnumerable<UTTUniversity.Models.tblNhaXuatBan>
+
+@{
+    ViewBag.Title = "Danh sách nhà xuất bản";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    int STT = 0;
+}
+<script>
+    function ConfirmDelete() {
+        var x = confirm("Bạn chắc chắn muốn xóa không?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>
+<div class="card-body table-border-style">
+    <div class="table-responsive">
+        <a href="@Url.Action("Create","NXB" )" class="btn btn-outline-info" @*onclick="CreateModal('@Url.Action("Create","NXB" )')*@ ">Thêm Mới</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã nhà xuất bản</th>
+                    <th>Tên nhà xuất bản</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Tùy Chọn</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    STT++;
+                    <tr>
+                        <td>@STT</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MA_NXB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TEN_NXB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SO_DTHOAI)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DIA_CHI)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "NXB" , new {id = item.ID })" class="btn btn-outline-info" style="float:left">Sửa</a>
+                            <a href="#" class="btn btn-outline-info" style="float:left" onclick="CreateModal('@Url.Action("Details", "NXB" , new {id = item.ID })')">Chi tiết</a>
+                            <a class="btn btn-outline-info" style="float:left" href="@Url.Action("Delete", "NXB", new { id = item.ID})" onclick="return ConfirmDelete();">Xóa</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="modal fade" id="myModal1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content" id="modelContent1">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function CreateModal(url) {
+        $('#modelContent1').load(url);
+        $('#myModal1').modal('show');
+    }
+
+</script>
+<script src="~/Areas/Admin/assets/node_modules/dropify/dist/js/dropify.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        // Basic
+        $('.dropify').dropify();
+
+        // Translated
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+
+        // Used events
+        var drEvent = $('#input-file-events').dropify();
+
+        drEvent.on('dropify.beforeClear', function (event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+
+        drEvent.on('dropify.afterClear', function (event, element) {
+            alert('File deleted');
+        });
+
+        drEvent.on('dropify.errors', function (event, element) {
+            console.log('Has Errors');
+        });
+
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function (e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+</script>
