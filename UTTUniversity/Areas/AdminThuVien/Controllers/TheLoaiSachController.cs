@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ThuVienTruongHoc.Areas.Admin.Models;
+using UTTUniversity.Models;
 
-namespace ThuVienTruongHoc.Areas.Admin.Controllers
+namespace UTTUniversity.Areas.AdminThuVien.Controllers
 {
     public class TheLoaiSachController : Controller
     {
-
-        TRUONGHOCDbContext db;
+        // GET: AdminThuVien/TheLoaiSach
+        CECMSDbContext db;
         // GET: Admin/TheLoaiSach
         public ActionResult Index()
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var model = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1).ToList();
             return View(model);
-        
+
         }
 
         public ActionResult Create()
@@ -26,9 +26,9 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(tblTheLoaiSach model , FormCollection collection)
+        public ActionResult Create(tblTheLoaiSach model, FormCollection collection)
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             model.TRANG_THAI = 1;
             var item = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1).ToList();
             foreach (var itemNXB in item)
@@ -56,7 +56,7 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
 
         public ActionResult Details(int id)
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var model = db.tblTheLoaiSaches.Find(id);
             return PartialView(model);
         }
@@ -64,14 +64,14 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
 
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var model = db.tblTheLoaiSaches.Find(id);
             return View(model);
         }
         [HttpPost]
         public ActionResult Edit(tblTheLoaiSach model, FormCollection collection)
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var item = db.tblTheLoaiSaches.Find(model.ID);
 
             item.TEN_THELOAI = model.TEN_THELOAI;
@@ -104,7 +104,7 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var item = db.tblTheLoaiSaches.Find(id);
             if (item != null)
             {

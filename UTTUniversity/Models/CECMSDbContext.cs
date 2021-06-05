@@ -8,7 +8,7 @@ namespace UTTUniversity.Models
     public partial class CECMSDbContext : DbContext
     {
         public CECMSDbContext()
-            : base("name=CECMSDbContext1")
+            : base("name=CECMSDbContext2")
         {
         }
 
@@ -46,12 +46,12 @@ namespace UTTUniversity.Models
         public virtual DbSet<tblSinhVien> tblSinhViens { get; set; }
         public virtual DbSet<tblSinhVien_HocPhan> tblSinhVien_HocPhan { get; set; }
         public virtual DbSet<tblSinhVien_Khoa> tblSinhVien_Khoa { get; set; }
-        public virtual DbSet<tblTacGia> tblTacGias { get; set; }
         public virtual DbSet<tblTheLoaiSach> tblTheLoaiSaches { get; set; }
         public virtual DbSet<tblThoiKhoaBieu> tblThoiKhoaBieux { get; set; }
         public virtual DbSet<tblTrinhDoHocVan> tblTrinhDoHocVans { get; set; }
         public virtual DbSet<tblVideo> tblVideos { get; set; }
         public virtual DbSet<tblCategory> tblCategories { get; set; }
+        public virtual DbSet<tblTacGia> tblTacGias { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -122,7 +122,5 @@ namespace UTTUniversity.Models
                 .Property(e => e.MA_KHOA)
                 .IsFixedLength();
         }
-
-        public System.Data.Entity.DbSet<UTTUniversity.Models.tblAccountNhanVien> tblAccountNhanViens { get; set; }
     }
 }

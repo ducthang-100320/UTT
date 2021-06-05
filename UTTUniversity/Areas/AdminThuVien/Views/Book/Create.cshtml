@@ -1,14 +1,14 @@
-﻿@model ThuVienTruongHoc.Areas.Admin.Models.tblSach
+﻿@model UTTUniversity.Models.tblSach
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
-    var lstTacGia = (List<ThuVienTruongHoc.Areas.Admin.Models.tblTacGia>)ViewBag.setcontrolTGia;
-    var lstTLoai = (List<ThuVienTruongHoc.Areas.Admin.Models.tblTheLoaiSach>)ViewBag.setcontrolTLoai;
-    var lstNXB = (List<ThuVienTruongHoc.Areas.Admin.Models.tblNhaXuatBan>)ViewBag.setcontrolNXB;
+@{
+    var lstTacGia = (List<UTTUniversity.Models.tblTacGia>)ViewBag.setcontrolTGia;
+    var lstTLoai = (List<UTTUniversity.Models.tblTheLoaiSach>)ViewBag.setcontrolTLoai;
+    var lstNXB = (List<UTTUniversity.Models.tblNhaXuatBan>)ViewBag.setcontrolNXB;
 }
 <html>
 <head>

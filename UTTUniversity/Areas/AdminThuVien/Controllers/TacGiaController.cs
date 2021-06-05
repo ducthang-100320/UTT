@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ThuVienTruongHoc.Areas.Admin.Models;
+using UTTUniversity.Models;
 
-namespace ThuVienTruongHoc.Areas.Admin.Controllers
+namespace UTTUniversity.Areas.AdminThuVien.Controllers
 {
     public class TacGiaController : Controller
     {
-        TRUONGHOCDbContext db;
+        // GET: AdminThuVien/TacGia
+        CECMSDbContext db;
         // GET: Admin/TacGia
         public ActionResult Index()
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var model = db.tblTacGias.Where(x => x.TRANG_THAI == 1).ToList();
             return View(model);
         }
@@ -23,7 +24,7 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(tblTacGia model, HttpPostedFile filePost,FormCollection collection)
+        public ActionResult Create(tblTacGia model, HttpPostedFile filePost, FormCollection collection)
         {
             string fileLocation = "";
             if (Request.Files["filePost"].ContentLength <= 0) { model.IMAGE = ""; }
@@ -46,11 +47,11 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
             {
                 model.GIOI_TINH = 1;
             }
-            else if(strRadio =="Nu")
+            else if (strRadio == "Nu")
             {
                 model.GIOI_TINH = 0;
             }
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             model.TRANG_THAI = 1;
             int iContent = fileLocation.IndexOf("Content");
             if (iContent > 0)
@@ -84,7 +85,7 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
         }
         public ActionResult Details(int id)
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var model = db.tblTacGias.Find(id);
             return PartialView(model);
         }
@@ -92,14 +93,14 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
 
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var model = db.tblTacGias.Find(id);
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit(tblTacGia model, HttpPostedFile filePost, FormCollection collection )
+        public ActionResult Edit(tblTacGia model, HttpPostedFile filePost, FormCollection collection)
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var item = db.tblTacGias.Find(model.ID);
             item.TEN_TACGIA = model.TEN_TACGIA;
             item.MA_TACGIA = model.MA_TACGIA;
@@ -162,7 +163,7 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var item = db.tblTacGias.Find(id);
             if (item != null)
             {

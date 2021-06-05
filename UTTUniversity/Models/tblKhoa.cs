@@ -23,13 +23,11 @@ namespace UTTUniversity.Models
         [StringLength(150)]
         public string TEN_KHOA { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string DIA_CHI { get; set; }
 
-        public int SO_DIENTHOAI { get; set; }
+        public int? SO_DIENTHOAI { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string EMAIL { get; set; }
 

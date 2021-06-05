@@ -6,7 +6,7 @@ using System.Web;
 
 namespace UTTUniversity.Models
 {
-    public partial class tblAccountNhanVien
+    public class tblAccountNhanVien
     {
         public int ID { get; set; }
 
@@ -55,24 +55,24 @@ namespace UTTUniversity.Models
 
         public string DIA_CHI { get; set; }
 
-        
+
         public string Image { get; set; }
 
-        
+
         public string MA_PHONGBAN { get; set; }
 
-        
+
         public string MA_CHUCVU { get; set; }
 
-        
+
         public string MA_TRINHDO { get; set; }
 
         public int TRANGTHAI { get; set; }
 
-        
+
         public string MO_TA { get; set; }
 
-       
+
         public string GHI_CHU { get; set; }
     }
 }

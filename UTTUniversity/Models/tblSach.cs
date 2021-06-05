@@ -9,7 +9,9 @@ namespace UTTUniversity.Models
     [Table("tblSach")]
     public partial class tblSach
     {
-        [Key]
+        public int ID { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string MA_SACH { get; set; }
 
@@ -25,14 +27,18 @@ namespace UTTUniversity.Models
         [StringLength(50)]
         public string MA_THELOAI { get; set; }
 
+        public int SO_LUONG { get; set; }
+
         [Required]
         [StringLength(50)]
         public string MA_NXB { get; set; }
 
+        [StringLength(200)]
+        public string IMAGE { get; set; }
+
         [StringLength(300)]
         public string MO_TA { get; set; }
 
-        [StringLength(500)]
-        public string GHI_CHU { get; set; }
+        public int TRANG_THAI { get; set; }
     }
 }

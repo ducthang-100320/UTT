@@ -9,7 +9,9 @@ namespace UTTUniversity.Models
     [Table("tblDocGia")]
     public partial class tblDocGia
     {
-        [Key]
+        public int ID { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string MA_DOCGIA { get; set; }
 
@@ -24,6 +26,10 @@ namespace UTTUniversity.Models
         [Required]
         [StringLength(150)]
         public string TEN_DOCGIA { get; set; }
+
+        public int GIOI_TINH { get; set; }
+
+        public DateTime NGAY_SINH { get; set; }
 
         [Required]
         [StringLength(15)]
