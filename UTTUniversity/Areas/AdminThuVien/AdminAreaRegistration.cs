@@ -15,10 +15,10 @@ namespace ThuVienTruongHoc.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
+                "AdminAdminThuVien_default",
+                "AdminThuVien/{controller}/{action}/{id}",
                new { action = "Index", controller = "Home", id = UrlParameter.Optional },
-               new[] { "ThuVienTruongHoc.Areas.Admin.Controllers" }
+               new[] { "UTTUniversity.Areas.AdminThuVien.Controllers" }
             );
         }
     }
