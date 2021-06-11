@@ -9,19 +9,20 @@ namespace UTTUniversity.Models
     [Table("tblMuonTra")]
     public partial class tblMuonTra
     {
-        [Key]
-        [StringLength(50)]
-        public string MA_MUONTRA { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string MA_NV { get; set; }
+        public string MA_SACH { get; set; }
 
         [Required]
         [StringLength(50)]
         public string MA_DOCGIA { get; set; }
 
         public DateTime NGAY_MUON { get; set; }
+
+        public int SO_LUONG { get; set; }
 
         public DateTime NGAY_TRA { get; set; }
 

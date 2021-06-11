@@ -1,8 +1,8 @@
-﻿@model IEnumerable<ThuVienTruongHoc.Areas.Admin.Models.tblTheLoaiSach>
+﻿@model IEnumerable<UTTUniversity.Models.tblTheLoaiSach>
 
 @{
     ViewBag.Title = "Danh mục thể loại";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
 }
 
 @{
@@ -17,7 +17,7 @@
             return false;
     }
 </script>
-<div class="card-body table-border-style" >
+<div class="card-body table-border-style">
     <div class="table-responsive">
         <a href="@Url.Action("Create","TheLoaiSach" )" class="btn btn-outline-info" @*onclick="CreateModal('@Url.Action("Create","NXB" )')*@ ">Thêm Mới</a>
         <table class="table table-striped">
@@ -41,7 +41,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.TEN_THELOAI)
                         </td>
-                        
+
                         <td>
                             <a href="@Url.Action("Edit", "TheLoaiSach" , new {id = item.ID })" class="btn btn-outline-info" style="float:left">Sửa</a>
                             <a href="#" class="btn btn-outline-info" style="float:left" onclick="CreateModal('@Url.Action("Details", "TheLoaiSach" , new {id = item.ID })')">Chi tiết</a>

@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ThuVienTruongHoc.Areas.Admin.Models;
+using UTTUniversity.Models;
 
-namespace ThuVienTruongHoc.Areas.Admin.Controllers
+namespace UTTUniversity.Areas.AdminThuVien.Controllers
 {
     public class BookController : Controller
     {
-        TRUONGHOCDbContext db;
+        // GET: AdminThuVien/Book
+        CECMSDbContext db;
         // GET: Admin/Book
         public ActionResult Index(string searchString)
         {
- 
-            db = new TRUONGHOCDbContext();
+
+            db = new CECMSDbContext();
             var listTheLoai = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1);
             Session["TheloaiSach"] = listTheLoai;
 
@@ -42,7 +43,7 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
                         return View(model1);
                     }
                 }
-                var model2 = db.tblSaches.Where(x => x.TRANG_THAI == 1 &&( x.TEN_SACH.Contains(searchString))).ToList();
+                var model2 = db.tblSaches.Where(x => x.TRANG_THAI == 1 && (x.TEN_SACH.Contains(searchString))).ToList();
                 return View(model2);
             }
             else
@@ -50,12 +51,12 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
                 var model2 = db.tblSaches.Where(x => x.TRANG_THAI == 1).ToList();
                 return View(model2);
             }
-        
+
         }
         public ActionResult IndexUser(int page = 1, int pageSize = 5)
         {
 
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             double totalRecord = db.tblSaches.Where(x => x.TRANG_THAI == 1).Count();
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
@@ -73,16 +74,16 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
-            
+
             setControl();
             return View();
         }
 
         [HttpPost]
 
-        public ActionResult Create(tblSach model,HttpPostedFile filePost ,FormCollection collection)
+        public ActionResult Create(tblSach model, HttpPostedFile filePost, FormCollection collection)
         {
-                setControl();
+            setControl();
             string fileLocation = "";
             if (Request.Files["filePost"].ContentLength <= 0) { model.IMAGE = ""; }
             ModelState["filePost"].Errors.Clear();
@@ -100,67 +101,67 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
                 Request.Files["filePost"].SaveAs(fileLocation);
             }
             model.MA_NXB = collection["cboNXB"].ToString();
-                model.MA_TACGIA = collection["cboTacGia"].ToString();
-                model.MA_THELOAI = collection["cboTLoai"].ToString();
-                model.MO_TA = "1";
-                model.TRANG_THAI = 1;
+            model.MA_TACGIA = collection["cboTacGia"].ToString();
+            model.MA_THELOAI = collection["cboTLoai"].ToString();
+            model.MO_TA = "1";
+            model.TRANG_THAI = 1;
             int iContent = fileLocation.IndexOf("Content");
             if (iContent > 0)
             {
                 model.IMAGE = @"\" + fileLocation.Substring(iContent, fileLocation.Length - iContent);
             }
-            db = new TRUONGHOCDbContext();
-                var item = db.tblSaches.Where(x => x.TRANG_THAI == 1).ToList();
-                var result = false;
-                foreach (var itemSach in item)
+            db = new CECMSDbContext();
+            var item = db.tblSaches.Where(x => x.TRANG_THAI == 1).ToList();
+            var result = false;
+            foreach (var itemSach in item)
+            {
+                if (model.MA_SACH == itemSach.MA_SACH)
                 {
-                    if (model.MA_SACH == itemSach.MA_SACH)
-                    {
-                        result = false;
-                        break;
-                    }
-                    else
-                    {
-                        result = true;
-                    }
-                }
-                if (result == false)
-                {
-                    ModelState.AddModelError("", "Mã sách đã tồn tại");
-                    setControl();
-                    return View();
-                }
-                else if (collection["cboNXB"].ToString() == "-1"|| collection["cboTacGia"].ToString() == "-1" || collection["cboTLoai"].ToString() == "-1" || model.MA_SACH == null)
-                {
-                    ModelState.AddModelError("", "Lỗi kiểm tra dữ liệu");
-                    setControl();
-                    return View();
+                    result = false;
+                    break;
                 }
                 else
                 {
-                    db.tblSaches.Add(model);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Book");
+                    result = true;
                 }
-            
+            }
+            if (result == false)
+            {
+                ModelState.AddModelError("", "Mã sách đã tồn tại");
+                setControl();
+                return View();
+            }
+            else if (collection["cboNXB"].ToString() == "-1" || collection["cboTacGia"].ToString() == "-1" || collection["cboTLoai"].ToString() == "-1" || model.MA_SACH == null)
+            {
+                ModelState.AddModelError("", "Lỗi kiểm tra dữ liệu");
+                setControl();
+                return View();
+            }
+            else
+            {
+                db.tblSaches.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Book");
+            }
+
         }
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            
-            db = new TRUONGHOCDbContext();
+
+            db = new CECMSDbContext();
             setControl();
             var model = db.tblSaches.Find(id);
 
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit(tblSach model,HttpPostedFile filePost ,FormCollection collection)
+        public ActionResult Edit(tblSach model, HttpPostedFile filePost, FormCollection collection)
         {
             setControl();
             var itemS = db.tblSaches.Find(model.ID);
             var item = db.tblSaches.Where(x => x.TRANG_THAI == 1 && x.ID != model.ID).ToList();
-        
+
             itemS.MA_SACH = model.MA_SACH;
             itemS.TEN_SACH = model.TEN_SACH;
             itemS.MA_NXB = collection["cboNXB"].ToString();
@@ -218,11 +219,11 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", "Book");
             }
-            
+
         }
         public void setControl()
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
 
             var cboTheLoai = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1).ToList();
             ViewBag.setcontrolTLoai = cboTheLoai;
@@ -239,7 +240,7 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
         public ActionResult Details(int id)
         {
             setControl();
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var model = db.tblSaches.Find(id);
             return PartialView(model);
         }

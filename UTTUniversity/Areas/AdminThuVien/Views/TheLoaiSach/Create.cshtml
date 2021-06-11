@@ -1,9 +1,10 @@
-﻿@model ThuVienTruongHoc.Areas.Admin.Models.tblTheLoaiSach
+﻿@model UTTUniversity.Models.tblTheLoaiSach
 
 @{
-    ViewBag.Title = "Danh mục thể loại";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Thêm thể loại sách";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
 }
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -35,7 +36,7 @@
                             @Html.ValidationMessageFor(model => model.TEN_THELOAI, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                   
+
                     <div class="col-lg-12">
                         <div class="form-group" style="margin-top: .5rem;">
                             <br />

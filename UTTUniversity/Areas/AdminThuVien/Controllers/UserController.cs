@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ThuVienTruongHoc.Areas.Admin.Controllers
+namespace UTTUniversity.Areas.AdminThuVien.Controllers
 {
     public class UserController : Controller
     {
-        // GET: Admin/User
+        // GET: AdminThuVien/User
         public ActionResult Index()
         {
             return View();

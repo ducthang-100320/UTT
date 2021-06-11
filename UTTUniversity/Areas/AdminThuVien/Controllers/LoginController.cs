@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ThuVienTruongHoc.Areas.Admin.Models;
+using UTTUniversity.Models;
 
-namespace ThuVienTruongHoc.Areas.Admin.Controllers
+namespace UTTUniversity.Areas.AdminThuVien.Controllers
 {
     public class LoginController : Controller
     {
-        TRUONGHOCDbContext db;
+        // GET: AdminThuVien/Login
+        CECMSDbContext db;
 
         public ActionResult Index()
         {
@@ -18,19 +19,19 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
 
         // GET: Admin/Login
         [HttpPost]
-        public ActionResult Index( tblAccount model, FormCollection collection)
+        public ActionResult Index(tblAccount model, FormCollection collection)
         {
-            db =new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var item = db.tblAccounts.Where(x => x.AccoutName == model.AccoutName && x.Password == model.Password && x.Status == 1).FirstOrDefault();
             if (item != null)
             {
-                if (item.DateIssued<DateTime.Now)
+                if (item.DateIssued < DateTime.Now)
                 {
-                
-                        return RedirectToAction("Index","Home");
-                 
-                   
-                   
+
+                    return RedirectToAction("Index", "Home");
+
+
+
                 }
                 else
                 {
@@ -43,7 +44,7 @@ namespace ThuVienTruongHoc.Areas.Admin.Controllers
                 ModelState.AddModelError("", "Thông tin tài khoản hoặc mật khẩu không chính xác");
                 return View();
             }
-            
+
         }
     }
 }

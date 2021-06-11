@@ -19,8 +19,6 @@ namespace UTTUniversity.Models
         [StringLength(500)]
         public string Password { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DateIssued { get; set; }
 
         public int Status { get; set; }

@@ -9,7 +9,9 @@ namespace UTTUniversity.Models
     [Table("tblTheLoaiSach")]
     public partial class tblTheLoaiSach
     {
-        [Key]
+        public int ID { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string MA_THELOAI { get; set; }
 
@@ -17,7 +19,6 @@ namespace UTTUniversity.Models
         [StringLength(150)]
         public string TEN_THELOAI { get; set; }
 
-        [StringLength(500)]
-        public string GHI_CHU { get; set; }
+        public int TRANG_THAI { get; set; }
     }
 }

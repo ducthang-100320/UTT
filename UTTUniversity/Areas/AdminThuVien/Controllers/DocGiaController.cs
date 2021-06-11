@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ThuVienTruongHoc.Areas.Admin.Models;
+using UTTUniversity.Models;
 
-namespace ThuVienTruongHoc.Areas.Admin.Controllers
+namespace UTTUniversity.Areas.AdminThuVien.Controllers
 {
     public class DocGiaController : Controller
     {
-        TRUONGHOCDbContext db;
+        // GET: AdminThuVien/DocGia
+        CECMSDbContext db;
         // GET: Admin/DocGia
         public ActionResult Index()
         {
-            db = new TRUONGHOCDbContext();
+            db = new CECMSDbContext();
             var sinhvien = db.tblSinhViens.Where(x => x.TINH_TRANG == 1).ToList();
 
-            var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV001") ).ToList();
+            var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV001")).ToList();
 
             var loai = db.tblLoaiDocGias.Where(x => x.TRANG_THAI == 1);
             Session["loai"] = loai;

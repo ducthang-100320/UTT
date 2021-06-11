@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ThuVienTruongHoc.Areas.Admin.Models;
+using UTTUniversity.Models;
 
-namespace ThuVienTruongHoc.Areas.Admin.Controllers
+namespace UTTUniversity.Areas.AdminThuVien.Controllers
 {
     public class HomeController : Controller
     {
-
-        TRUONGHOCDbContext db;
+        // GET: AdminThuVien/Home
+        CECMSDbContext db;
         // GET: Admin/Home
         public ActionResult Index(/*int page = 1, int pageSize = 5*/ )
         {
-          
+
             //db = new TRUONGHOCDbContext();
             //double totalRecord = db.tblSaches.Where(x => x.TRANG_THAI == 1).Count();
             //ViewBag.Total = totalRecord;

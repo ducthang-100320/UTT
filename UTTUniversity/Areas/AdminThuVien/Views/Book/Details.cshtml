@@ -1,8 +1,11 @@
-﻿@model ThuVienTruongHoc.Areas.Admin.Models.tblSach
+﻿@model UTTUniversity.Models.tblSach
+
 @{
-    var lstTacGia = (List<ThuVienTruongHoc.Areas.Admin.Models.tblTacGia>)ViewBag.setcontrolTGia;
-    var lstTLoai = (List<ThuVienTruongHoc.Areas.Admin.Models.tblTheLoaiSach>)ViewBag.setcontrolTLoai;
-    var lstNXB = (List<ThuVienTruongHoc.Areas.Admin.Models.tblNhaXuatBan>)ViewBag.setcontrolNXB;
+                /**/
+
+                var lstTacGia = (List<UTTUniversity.Models.tblTacGia>)ViewBag.setcontrolTGia;
+                var lstTLoai = (List<UTTUniversity.Models.tblTheLoaiSach>)ViewBag.setcontrolTLoai;
+                var lstNXB = (List<UTTUniversity.Models.tblNhaXuatBan>)ViewBag.setcontrolNXB;
 }
 <div class="modal-content">
     <div class="modal-header">
@@ -12,10 +15,10 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-lg-4">
-                        <div class="form-group">
-                           
-                            <img src="@Model.IMAGE" alt="user" style="height: 150px; width:141px" />
-                        </div>
+                <div class="form-group">
+
+                    <img src="@Model.IMAGE" alt="user" style="height: 150px; width:141px" />
+                </div>
             </div>
             <div class="col-lg-8">
                 <div class="row">
@@ -39,7 +42,7 @@
                         </div>
                     </div>
 
-                  
+
                 </div>
                 <div class="row">
                     <div class="col-lg-6">

@@ -9,18 +9,30 @@ namespace UTTUniversity.Models
     [Table("tblTacGia")]
     public partial class tblTacGia
     {
-        [Key]
+        
+        public int ID { get; set; }
+
+       
         [StringLength(50)]
         public string MA_TACGIA { get; set; }
 
-        [Required]
+        
         [StringLength(150)]
         public string TEN_TACGIA { get; set; }
 
-        [StringLength(300)]
+       
+        [StringLength(200)]
+        public string IMAGE { get; set; }
+
+    
+        public int GIOI_TINH { get; set; }
+
+       
+        public DateTime NGAY_SINH { get; set; }
+
         public string MO_TA { get; set; }
 
-        [StringLength(500)]
-        public string GHI_CHU { get; set; }
+
+        public int TRANG_THAI { get; set; }
     }
 }

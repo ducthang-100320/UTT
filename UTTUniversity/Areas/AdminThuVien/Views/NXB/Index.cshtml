@@ -1,9 +1,10 @@
-﻿@model IEnumerable<ThuVienTruongHoc.Areas.Admin.Models.tblNhaXuatBan>
+﻿@model IEnumerable<UTTUniversity.Models.tblNhaXuatBan>
 
 @{
-    ViewBag.Title = "Danh Sách nhà xuất bản";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Danh sách nhà xuất bản";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
 }
+
 @{
     int STT = 0;
 }
@@ -51,7 +52,7 @@
                         <td>
                             <a href="@Url.Action("Edit", "NXB" , new {id = item.ID })" class="btn btn-outline-info" style="float:left">Sửa</a>
                             <a href="#" class="btn btn-outline-info" style="float:left" onclick="CreateModal('@Url.Action("Details", "NXB" , new {id = item.ID })')">Chi tiết</a>
-                            <a class="btn btn-outline-info" style="float:left" href="@Url.Action("Delete", "NXB", new { id = item.ID})" onclick = "return ConfirmDelete();">Xóa</a>
+                            <a class="btn btn-outline-info" style="float:left" href="@Url.Action("Delete", "NXB", new { id = item.ID})" onclick="return ConfirmDelete();">Xóa</a>
                         </td>
 
                     </tr>
@@ -119,5 +120,3 @@
         })
     });
 </script>
-
-

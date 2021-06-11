@@ -1,4 +1,4 @@
-﻿@model ThuVienTruongHoc.Areas.Admin.Models.tblAccount
+﻿@model UTTUniversity.Models.tblAccount
 
 @{
     Layout = null;
@@ -16,13 +16,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="~/Areas/Admin/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Areas/AdminThuVien/assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
 
     <!-- page css -->
-    <link href="~/Areas/Admin/assets/dist/css/pages/login-register-lock.css" rel="stylesheet">
+    <link href="~/Areas/AdminThuVien/assets/dist/css/pages/login-register-lock.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="~/Areas/Admin/assets/dist/css/style.min.css" rel="stylesheet">
+    <link href="~/Areas/AdminThuVien/assets/dist/css/style.min.css" rel="stylesheet">
     <style>
         body {
             background-image: url("https://i.pinimg.com/originals/83/29/d9/8329d9b2243787d7cace4fa00d05bdb6.jpg");
@@ -54,22 +54,22 @@
         <!-- Main wrapper - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <section id="wrapper">
-            <div class="login-register" style="background-image:url(~/Areas/Admin/assets/images/background/login-register.jpg);">
+            <div class="login-register" style="background-image:url(~/Areas/AdminThuVien/assets/images/background/login-register.jpg);">
                 <div class="login-box card">
-                    @Html.ValidationSummary(true,"",new {@class ="text-danger"})
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="card-body">
                         <form class="form-horizontal form-material" id="loginform" action="http://eliteadmin.themedesigner.in/demos/bt4/inverse/index.html">
                             <h3 class="text-center m-b-20">Sign In</h3>
                             <div class="form-group ">
                                 <div class="col-xs-12">
                                     @*<input class="form-control" type="text" required="" placeholder="Username">*@
-                                    @Html.TextBoxFor(model => model.AccoutName,new { @class="form-control",placeholder = "Username"})
+                                    @Html.TextBoxFor(model => model.AccoutName, new { @class = "form-control", placeholder = "Username" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     @*<input class="form-control" type="password" required="" placeholder="Password">*@
-                                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control",placeholder ="Password",@type = "password"})
+                                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", @type = "password" })
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -133,10 +133,10 @@
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="~/Areas/Admin/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+        <script src="~/Areas/AdminThuVien/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap tether Core JavaScript -->
-        <script src="~/Areas/Admin/assets/node_modules/popper/popper.min.js"></script>
-        <script src="~/Areas/Admin/assets/node_modules/bootstrap/~/Areas/Admin/assets/dist/js/bootstrap.min.js"></script>
+        <script src="~/Areas/AdminThuVien/assets/node_modules/popper/popper.min.js"></script>
+        <script src="~/Areas/AdminThuVien/assets/node_modules/bootstrap/~/Areas/AdminThuVien/assets/dist/js/bootstrap.min.js"></script>
         <!--Custom JavaScript -->
         <script type="text/javascript">
             $(function () {

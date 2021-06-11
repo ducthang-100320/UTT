@@ -1,9 +1,10 @@
-﻿@model IEnumerable<ThuVienTruongHoc.Areas.Admin.Models.tblTacGia>
+﻿@model IEnumerable<UTTUniversity.Models.tblTacGia>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Danh mục tác giả";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
 }
+
 @{
     int STT = 0;
 
@@ -23,7 +24,7 @@
             </div>
             <div class="card-body table-border-style" style="background-color:#8df9ea">
                 <div class="table-responsive">
-                    <table class="table" >
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Số thứ tự</th>
