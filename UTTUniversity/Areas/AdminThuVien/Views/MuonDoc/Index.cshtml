@@ -1,0 +1,92 @@
+﻿@model UTTUniversity.Models.tblMuonTra
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var lstTacGia = (List<UTTUniversity.Models.tblTacGia>)ViewBag.setcontrolTGia;
+    var lstTLoai = (List<UTTUniversity.Models.tblTheLoaiSach>)ViewBag.setcontrolTLoai;
+    var lstNXB = (List<UTTUniversity.Models.tblNhaXuatBan>)ViewBag.setcontrolNXB;
+    var sach = (UTTUniversity.Models.tblSach)ViewBag.Sach;
+
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.sa</title>
+</head>
+<body>
+    <div class="modal-content">
+        <div class="modal-header" style="background-color: dodgerblue">
+            <h5 class="modal-title" id="exampleModalLongTitle">Tạo Mới</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("Index", "MuonDoc", new { id = sach.ID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="row p-t-0">
+                            <div class="col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <img src="@sach.IMAGE" alt="user" style="height: 155px; width:233px" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Mã đọc giả: <span class="label-required"></span></label>
+                                    @Html.EditorFor(model => model.MA_DOCGIA, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MA_DOCGIA, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Số lượng: <span class="label-required">*</span></label>
+                                    @Html.EditorFor(model => model.SO_LUONG, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SO_LUONG, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Ngày mượn: <span class="label-required">*</span></label>
+                                    @Html.EditorFor(model => model.NGAY_MUON, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.NGAY_MUON, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Ngày trả: <span class="label-required">*</span></label>
+                                    @Html.EditorFor(model => model.NGAY_TRA, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.NGAY_TRA, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group" style="margin-top: .5rem;">
+                            <br />
+                            <input type="submit" value="Đặt trước" class="btn btn-dropbox" />
+                            <a class="btn btn-outline-info" href="@Url.Action("IndexUser", "Book")">Quay lại</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

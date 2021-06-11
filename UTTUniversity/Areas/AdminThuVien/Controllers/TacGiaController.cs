@@ -105,7 +105,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             item.TEN_TACGIA = model.TEN_TACGIA;
             item.MA_TACGIA = model.MA_TACGIA;
             item.MO_TA = model.MO_TA;
-            item.NGAY_SINH = model.NGAY_SINH;
+            item.NGAYSINH = model.NGAYSINH;
             string fileLocation = "";
             if (Request.Files["filePost"].ContentLength <= 0) { item.IMAGE = model.IMAGE; }
             ModelState["filePost"].Errors.Clear();

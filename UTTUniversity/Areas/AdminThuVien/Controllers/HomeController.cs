@@ -9,12 +9,13 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: AdminThuVien/Home
         CECMSDbContext db;
         // GET: Admin/Home
-        public ActionResult Index(/*int page = 1, int pageSize = 5*/ )
+        public ActionResult Index(/*int page = 1, int pageSize = 5*/ int id)
         {
-
+            db = new CECMSDbContext();
+            var model = db.tblAccounts.Where(x => x.ID == id).FirstOrDefault();
+            Session["accountAdmin"] = model;
             //db = new TRUONGHOCDbContext();
             //double totalRecord = db.tblSaches.Where(x => x.TRANG_THAI == 1).Count();
             //ViewBag.Total = totalRecord;
@@ -30,10 +31,6 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             //ViewBag.Prev = page - 1;
             //var model = db.tblSaches.Where(x => x.TRANG_THAI == 1).OrderByDescending(x=>x.ID).Skip((page -1)* pageSize).Take(pageSize).ToList(); 
             return View(/*model*/);
-        }
-        public ActionResult IndexUser()
-        {
-            return View();
         }
     }
 }

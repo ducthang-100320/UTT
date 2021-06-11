@@ -1,0 +1,137 @@
+﻿@model IEnumerable<UTTUniversity.Models.tblMuonTra>
+
+@{
+    ViewBag.Title = "IndexMuonTra";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
+    int STT = 0;
+}
+
+@{
+    var sach = (IEnumerable<UTTUniversity.Models.tblSach>)Session["sach"];
+
+}
+<div class="card">
+    <div class="card-body">
+        <div class="card-header" style="background-color:dodgerblue">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4 style="color:black">Danh mục mượn trả sách</h4>
+                </div>
+                <div class="col-lg-4">
+                    <a href="@Url.Action("Create", "MuonDoc")" style="float:left" class="btn btn-sm btn-primary btn-header">Thêm mới</a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive m-t-40">
+            <table id="myTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã đọc giả</th>
+                        <th>Tên Sách</th>
+                        <th>Ngày mượn</th>
+                        <th>Ngày trả</th>
+                        <th>Tình trạng</th>
+                        <th>Tùy chọn</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        STT = STT + 1;
+                        <tr>
+                            <td>
+                                @STT
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MA_DOCGIA)
+                            </td>
+                            <td>
+                                @foreach (var itemsach in sach)
+                                {
+                                    if (item.MA_SACH == itemsach.MA_SACH)
+                                    {
+                                        @Html.DisplayFor(modelItem => itemsach.TEN_SACH)
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NGAY_MUON)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NGAY_TRA)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GHI_CHU)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "DocGia", new { id = item.ID })">Sửa</a>
+
+                                <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "DocGia",new { id = item.ID })')">Chi tiết</a>
+
+                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "DocGia",new { id = item.ID })">Xóa</a>
+                                @*@Html.ActionLink("Delete", "Delete", new { id = item.RoleID })*@
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="~/Areas/Admin/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+<script>
+    $(function () {
+        $('#myTable').DataTable();
+        var table = $('#example').DataTable({
+            "columnDefs": [{
+                "visible": false,
+                "targets": 2
+            }],
+            "order": [
+                [2, 'asc']
+            ],
+            "displayLength": 25,
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({
+                    page: 'current'
+                }).nodes();
+                var last = null;
+                api.column(2, {
+                    page: 'current'
+                }).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                        last = group;
+                    }
+                });
+            }
+        });
+        // Order by the grouping
+        $('#example tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                table.order([2, 'desc']).draw();
+            } else {
+                table.order([2, 'asc']).draw();
+            }
+        });
+        // responsive table
+        $('#config-table').DataTable({
+            responsive: true
+        });
+        $('#example23').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+        $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+    });
+
+</script>

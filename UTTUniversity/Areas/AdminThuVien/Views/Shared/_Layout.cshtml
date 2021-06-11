@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html>
-
+@{
+    var a = Session["accountAdmin"] as UTTUniversity.Models.tblAccount;
+}
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,11 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="~/Areas/AdminThuVien/assets/images/favicon.png">
     <!-- This page CSS -->
-
     <!-- chartist CSS -->
     <link href="~/Areas/AdminThuVien/assets/node_modules/morrisjs/morris.css" rel="stylesheet">
     <!--Toaster Popup message CSS -->
@@ -63,19 +64,19 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                         @*<!-- Logo icon --><b>
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="~/Areas/AdminThuVien/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="~/Areas/AdminThuVien/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text --><span>
-                            <!-- dark Logo text -->
-                            <img src="~/Areas/AdminThuVien/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo text -->
-                            <img src="~/Areas/AdminThuVien/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
-                        </span>*@
+                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                                <!-- Dark Logo icon -->
+                                <img src="~/Areas/AdminThuVien/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo icon -->
+                                <img src="~/Areas/AdminThuVien/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text --><span>
+                                <!-- dark Logo text -->
+                                <img src="~/Areas/AdminThuVien/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo text -->
+                                <img src="~/Areas/AdminThuVien/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                            </span>*@
                         <img src="~/Areas/AdminThuVien/assets/images/uttlogo.png" width="100% " height="100%" alt="homepage" class="dark-logo" />
                     </a>
                 </div>
@@ -343,7 +344,7 @@
                         <div class="dropdown">
                             <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true"
                                aria-expanded="false">
-                                Tên Người Dùng
+                                @a.AccoutName
                                 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu animated flipInY">
@@ -389,21 +390,31 @@
                                 </span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li>
-                                    <a href="@Url.Action("Index","Book")">Danh Mục Sách </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index","TacGia")">Danh mục tác giả</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index","NXB")">Danh mục nhà xuất bản</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index","TheLoaiSach")">Danh mục thể loại</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index","DocGia")">Danh mục đọc giả</a>
-                                </li>
+                                @if (a.CreatedUser.Equals("ducthang"))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index","Book")">Quản lý sách </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","TacGia")">Quản lý  mục tác giả</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","NXB")">Quản lý mục nhà xuất bản</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","TheLoaiSach")">Quản lý  mục thể loại</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","DocGia")">Quản lý mục đọc giả</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Url.Action("IndexUser","Book")">Danh Mục Sách Thư Viện</a>
+                                    </li>
+                                }
+
                             </ul>
                         </li>
                         <li>
@@ -416,7 +427,7 @@
                                     <a href="@Url.Action("Index","MuonTra")">Mượn sách</a>
                                 </li>
                                 <li>
-                                    <a href="app-chat.html">Chat app</a>
+                                    <a href="@Url.Action("IndexUser","Book")">Danh Mục Sách Thư Viện</a>
                                 </li>
                                 <li>
                                     <a href="app-ticket.html">Support Ticket</a>
@@ -1043,6 +1054,6 @@
     <script src="~/Areas/AdminThuVien/assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
     <script src="~/Areas/AdminThuVien/assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
 
-   
+
 </body>
 </html>

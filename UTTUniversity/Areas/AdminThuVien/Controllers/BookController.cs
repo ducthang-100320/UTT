@@ -53,7 +53,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             }
 
         }
-        public ActionResult IndexUser(int page = 1, int pageSize = 5)
+        public ActionResult IndexUser(int page = 1, int pageSize = 12)
         {
 
             db = new CECMSDbContext();

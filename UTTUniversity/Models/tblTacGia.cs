@@ -28,7 +28,7 @@ namespace UTTUniversity.Models
         public int GIOI_TINH { get; set; }
 
        
-        public DateTime NGAY_SINH { get; set; }
+        public DateTime NGAYSINH { get; set; }
 
         public string MO_TA { get; set; }
 

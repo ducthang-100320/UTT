@@ -28,7 +28,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 if (item.DateIssued < DateTime.Now)
                 {
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new { id = item.ID });
 
 
 

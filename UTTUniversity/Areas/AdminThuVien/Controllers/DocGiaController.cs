@@ -37,6 +37,14 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 docGia.GIOI_TINH = item.GIOI_TINH;
                 docGia.GHI_CHU = item.GHI_CHU;
                 list.Add(docGia);
+                var muontra = db.tblMuonTras.Where(x => x.TRANG_THAI == 1 && x.MA_DOCGIA == docGia.MA_DOCGIA).ToList();
+                foreach (var item1 in muontra)
+                {
+                    if (item1.GHI_CHU.Equals("Quá hạn"))
+                    {
+                        list.Remove(docGia);
+                    }
+                }
             }
 
             foreach (var item1 in giangvien)
@@ -52,6 +60,14 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 docGia2.TRANG_THAI = 1;
                 docGia2.GHI_CHU = item1.GHI_CHU;
                 list.Add(docGia2);
+                var muontra = db.tblMuonTras.Where(x => x.TRANG_THAI == 1 && x.MA_DOCGIA == docGia2.MA_DOCGIA).ToList();
+                foreach (var item2 in muontra)
+                {
+                    if (item2.GHI_CHU.Equals("Quá hạn"))
+                    {
+                        list.Remove(docGia2);
+                    }
+                }
             }
 
             return View(list);
