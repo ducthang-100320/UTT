@@ -106,7 +106,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
                     accItem.Status = 1;
                     CECMSDbContext db = new CECMSDbContext();
                     db.tblAccounts.Add(accItem);
-                    //db.SaveChanges();
+                    db.SaveChanges();
                     tblNhanVien userItem = new tblNhanVien();
                     userItem.Account_ID = accItem.ID;
                     userItem.MA_NHANVIEN = model.MA_NHANVIEN;
@@ -116,9 +116,9 @@ namespace UTTUniversity.Areas.Admin.Controllers
                     userItem.NGAY_SINH = model.NGAY_SINH;
                     userItem.Email = model.Email;
                     userItem.SO_DIENTHOAI = model.SO_DIENTHOAI;
-                    //userItem.MA_PHONGBAN = model.MA_PHONGBAN;
-                    //userItem.MA_CHUCVU = model.MA_CHUCVU;
-                    //userItem.MA_TRINHDO = model.MA_TRINHDO;
+                    userItem.MA_PHONGBAN = collection["cboPhongBan"].ToString();
+                    userItem.MA_CHUCVU = collection["cboChucVu"].ToString();
+                    userItem.MA_TRINHDO = collection["cboTrinhDo"].ToString();
                     userItem.GIOI_TINH = 1;
                     userItem.TRANGTHAI = 1;
                     userItem.MO_TA = model.MO_TA;

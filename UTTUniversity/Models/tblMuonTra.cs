@@ -9,7 +9,6 @@ namespace UTTUniversity.Models
     [Table("tblMuonTra")]
     public partial class tblMuonTra
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Required]
