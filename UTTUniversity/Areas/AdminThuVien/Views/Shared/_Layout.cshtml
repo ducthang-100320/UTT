@@ -390,8 +390,7 @@
                                 </span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                @if (a.CreatedUser.Equals("ducthang"))
-                                {
+                                
                                     <li>
                                         <a href="@Url.Action("Index","Book")">Quản lý sách </a>
                                     </li>
@@ -407,13 +406,11 @@
                                     <li>
                                         <a href="@Url.Action("Index","DocGia")">Quản lý mục đọc giả</a>
                                     </li>
-                                }
-                                else
-                                {
+                              
                                     <li>
                                         <a href="@Url.Action("IndexUser","Book")">Danh Mục Sách Thư Viện</a>
                                     </li>
-                                }
+                                
 
                             </ul>
                         </li>
@@ -424,7 +421,7 @@
                             </a>
                             <ul aria-expanded="false" class="collapse">
                                 <li>
-                                    <a href="@Url.Action("Index","MuonTra")">Mượn sách</a>
+                                    <a href="@Url.Action("IndexMuonTra","MuonDoc")">Mượn sách</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("IndexUser","Book")">Danh Mục Sách Thư Viện</a>

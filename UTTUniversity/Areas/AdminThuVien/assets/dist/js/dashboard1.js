@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     "use strict";
     //This is for the Notification top right
     $.toast({
