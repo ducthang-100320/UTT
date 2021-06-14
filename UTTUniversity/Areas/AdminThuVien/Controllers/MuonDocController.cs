@@ -79,25 +79,26 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             //              join b in tblDocGia)
             ViewBag.Sach = sach;
             bool check = false;
-            foreach (var item in list)
-            {
-                if (model.MA_DOCGIA.Equals(item.MA_DOCGIA))
-                {
-                    check = true;
-                    break;
-                }
-                else
-                {
-                    check = false;
-                }
+            //foreach (var item in list)
+            //{
+            //    if (model.MA_DOCGIA.Equals(item.MA_DOCGIA))
+            //    {
+            //        check = true;
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        check = false;
+            //    }
 
-            }
-            if (check == false)
-            {
-                ModelState.AddModelError("", "Mã đọc giả không tồn tại");
-                return View();
-            }
-
+            //}
+            //if (check == false)
+            //{
+            //    ModelState.AddModelError("", "Mã đọc giả không tồn tại");
+            //    return View();
+            //}
+            var docgia = Session["user"] as UTTUniversity.Models.tblNhanVien;
+            model.MA_DOCGIA = docgia.MA_NHANVIEN;
             foreach (var item in muontra)
             {
                 if (item.GHI_CHU.Equals("Quá hạn"))
@@ -232,7 +233,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             {
                 sach.SO_LUONG = sach.SO_LUONG - model.SO_LUONG;
             }
-            if (model.NGAY_MUON.CompareTo(model.NGAY_TRA) == 1 || model.NGAY_MUON.CompareTo(model.NGAY_TRA) == 1)
+            if (model.NGAY_MUON.CompareTo(model.NGAY_TRA) == 1 )
             {
                 ModelState.AddModelError("", "Ngày trả phải lớn hơn ngày mượn");
                 return View();
@@ -245,6 +246,116 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             var result = db.SaveChanges();
             return RedirectToAction("IndexMuonTra", "MuonDoc");
 
+        }
+
+        public ActionResult Edit(int id)
+        {
+            db = new CECMSDbContext();
+            var model = db.tblMuonTras.Find(id);
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(tblMuonTra model ,FormCollection collection)
+        {
+            db = new CECMSDbContext();
+            #region getDocGia
+
+            var sinhvien = db.tblSinhViens.Where(x => x.TINH_TRANG == 1).ToList();
+
+            var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV001")).ToList();
+
+            var loai = db.tblLoaiDocGias.Where(x => x.TRANG_THAI == 1);
+            Session["loai"] = loai;
+            List<tblDocGia> list = new List<tblDocGia>();
+
+            foreach (var item in sinhvien)
+            {
+                tblDocGia docGia = new tblDocGia();
+                docGia.MA_DOCGIA = item.MA_SINHVIEN;
+                docGia.MA_LOAI = "SV";
+                docGia.MA_THE = item.MA_SINHVIEN;
+                docGia.NGAY_SINH = item.NGAY_SINH;
+                docGia.SO_DTHOAI = item.SO_DTHOAI;
+                docGia.TEN_DOCGIA = item.HO_TEN;
+                docGia.TRANG_THAI = 1;
+                docGia.GIOI_TINH = item.GIOI_TINH;
+                docGia.GHI_CHU = item.GHI_CHU;
+                list.Add(docGia);
+            }
+
+            foreach (var item1 in giangvien)
+            {
+                tblDocGia docGia2 = new tblDocGia();
+                docGia2.MA_DOCGIA = item1.MA_NHANVIEN;
+                docGia2.MA_LOAI = "GV";
+                docGia2.MA_THE = item1.MA_NHANVIEN;
+                docGia2.NGAY_SINH = item1.NGAY_SINH;
+                docGia2.GIOI_TINH = item1.GIOI_TINH;
+                docGia2.TEN_DOCGIA = item1.HO_TEN;
+                docGia2.SO_DTHOAI = item1.SO_DIENTHOAI;
+                docGia2.TRANG_THAI = 1;
+                docGia2.GHI_CHU = item1.GHI_CHU;
+                list.Add(docGia2);
+            }
+            #endregion
+            var muontra_edit = db.tblMuonTras.Find(model.ID);
+            var sach = db.tblSaches.Where(x => x.MA_SACH == model.MA_SACH && x.SO_LUONG > 0 && x.TRANG_THAI == 1).FirstOrDefault();
+            var muontra = db.tblMuonTras.Where(x => x.MA_DOCGIA == model.MA_DOCGIA && x.TRANG_THAI == 1).ToList();
+            //var docgia = (from a in tblAccount 
+            //              join b in tblDocGia)
+            bool check = false;
+            foreach (var item in list)
+            {
+                if (model.MA_DOCGIA.Equals(item.MA_DOCGIA))
+                {
+                    check = true;
+                    break;
+                }
+                else
+                {
+                    check = false;
+                }
+
+            }
+
+            if (check == false)
+            {
+                ModelState.AddModelError("", "Mã đọc giả không tồn tại");
+                return View();
+            }
+
+            if (sach == null)
+            {
+                ModelState.AddModelError("", "Mã sách này đã hết");
+                return View();
+            }
+
+            if (model.SO_LUONG > (sach.SO_LUONG+muontra_edit.SO_LUONG ))
+            {
+                ModelState.AddModelError("", "Số lượng sách không đủ");
+                return View();
+            }
+            else
+            {
+                sach.SO_LUONG = sach.SO_LUONG + muontra_edit.SO_LUONG - model.SO_LUONG;
+                
+            }
+            if (model.NGAY_MUON.CompareTo(model.NGAY_TRA) == 1 )
+            {
+                ModelState.AddModelError("", "Ngày trả phải lớn hơn ngày mượn");
+                return View();
+            }
+
+            muontra_edit.SO_LUONG = model.SO_LUONG;
+            muontra_edit.GHI_CHU = collection["customRadio"].ToString();
+            muontra_edit.MA_DOCGIA = model.MA_DOCGIA;
+            muontra_edit.MA_SACH = model.MA_SACH;
+            muontra_edit.NGAY_MUON = model.NGAY_MUON;
+            muontra_edit.NGAY_TRA = model.NGAY_TRA;
+            db.SaveChanges();
+
+            return RedirectToAction("IndexMuonTra", "MuonDoc");
         }
 
         public void setControl()
@@ -262,6 +373,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
 
         }
+
 
     }
 }

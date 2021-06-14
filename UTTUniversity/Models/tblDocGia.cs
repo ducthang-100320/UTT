@@ -29,6 +29,8 @@ namespace UTTUniversity.Models
 
         public int GIOI_TINH { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NGAY_SINH { get; set; }
 
         [Required]

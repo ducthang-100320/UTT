@@ -53,9 +53,9 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             }
 
         }
-        public ActionResult IndexUser(int page = 1, int pageSize = 12)
+        public ActionResult IndexUser(string searchString , int page = 1, int pageSize = 12)
         {
-
+            ViewBag.searchString = searchString;
             db = new CECMSDbContext();
             double totalRecord = db.tblSaches.Where(x => x.TRANG_THAI == 1).Count();
             ViewBag.Total = totalRecord;
@@ -69,8 +69,18 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             ViewBag.Last = totalPage;
             ViewBag.Next = page + 1;
             ViewBag.Prev = page - 1;
-            var model = db.tblSaches.Where(x => x.TRANG_THAI == 1).OrderByDescending(x => x.ID).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            return View(model);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var model = db.tblSaches.Where(x => x.TRANG_THAI == 1 && x.TEN_SACH.Equals(searchString)).OrderByDescending(x => x.ID).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                return View(model);
+            }
+            else
+            {
+                var model = db.tblSaches.Where(x => x.TRANG_THAI == 1).OrderByDescending(x => x.ID).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                return View(model);
+            }
+
+            
         }
         public ActionResult Create()
         {

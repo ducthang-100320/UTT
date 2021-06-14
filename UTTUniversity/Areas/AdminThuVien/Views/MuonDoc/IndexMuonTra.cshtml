@@ -67,11 +67,11 @@
                                 @Html.DisplayFor(modelItem => item.GHI_CHU)
                             </td>
                             <td>
-                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "DocGia", new { id = item.ID })">Sửa</a>
+                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "MuonDoc", new { id = item.ID })">Sửa</a>
 
-                                <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "DocGia",new { id = item.ID })')">Chi tiết</a>
+                                <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "MuonDoc",new { id = item.ID })')">Chi tiết</a>
 
-                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "DocGia",new { id = item.ID })">Xóa</a>
+                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "MuonDoc",new { id = item.ID })">Xóa</a>
                                 @*@Html.ActionLink("Delete", "Delete", new { id = item.RoleID })*@
 
                             </td>
@@ -83,7 +83,7 @@
         </div>
     </div>
 </div>
-<script src="~/Areas/Admin/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/Areas/AdminThuVien/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
 <script>
     $(function () {
         $('#myTable').DataTable();
