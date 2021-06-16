@@ -13,9 +13,13 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         // GET: Admin/Home
         public ActionResult Index(/*int page = 1, int pageSize = 5*/ int id)
         {
+            
             db = new CECMSDbContext();
             var model = db.tblAccounts.Where(x => x.ID == id).FirstOrDefault();
             Session["accountAdmin"] = model;
+
+            var model1 = db.tblNhanViens.Where(x => x.Account_ID == model.ID).FirstOrDefault();
+            Session["user"] = model1;
             //db = new TRUONGHOCDbContext();
             //double totalRecord = db.tblSaches.Where(x => x.TRANG_THAI == 1).Count();
             //ViewBag.Total = totalRecord;

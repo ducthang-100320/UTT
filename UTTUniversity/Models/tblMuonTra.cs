@@ -1,4 +1,4 @@
-namespace UTTUniversity.Models
+﻿namespace UTTUniversity.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,10 +19,15 @@ namespace UTTUniversity.Models
         [StringLength(50)]
         public string MA_DOCGIA { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NGAY_MUON { get; set; }
 
+        [Required(ErrorMessage ="Mời nhập số lượng")]
         public int SO_LUONG { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NGAY_TRA { get; set; }
 
         public int TRANG_THAI { get; set; }

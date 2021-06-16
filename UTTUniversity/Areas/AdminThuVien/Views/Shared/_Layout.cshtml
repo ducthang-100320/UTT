@@ -344,7 +344,7 @@
                         <div class="dropdown">
                             <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true"
                                aria-expanded="false">
-                                @*//@a.AccoutName*@
+                                @a.AccoutName
                                 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu animated flipInY">
@@ -390,7 +390,8 @@
                                 </span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                
+                                @if (a.CreatedUser.Equals("Đức Anh"))
+                                {
                                     <li>
                                         <a href="@Url.Action("Index","Book")">Quản lý sách </a>
                                     </li>
@@ -406,11 +407,13 @@
                                     <li>
                                         <a href="@Url.Action("Index","DocGia")">Quản lý mục đọc giả</a>
                                     </li>
-                              
+                                }
+                                else
+                                {
                                     <li>
                                         <a href="@Url.Action("IndexUser","Book")">Danh Mục Sách Thư Viện</a>
                                     </li>
-                                
+                                }
 
                             </ul>
                         </li>
@@ -421,7 +424,7 @@
                             </a>
                             <ul aria-expanded="false" class="collapse">
                                 <li>
-                                    <a href="@Url.Action("IndexMuonTra","MuonDoc")">Mượn sách</a>
+                                    <a href="@Url.Action("IndexMuonTra","MuonDoc")">Quản Lý Mượn Sách</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("IndexUser","Book")">Danh Mục Sách Thư Viện</a>

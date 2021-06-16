@@ -27,6 +27,7 @@ namespace UTTUniversity.Models
         [StringLength(50)]
         public string MA_THELOAI { get; set; }
 
+
         public int SO_LUONG { get; set; }
 
         [Required]

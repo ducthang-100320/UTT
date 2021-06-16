@@ -5,6 +5,7 @@
 
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
 }
 
 
@@ -15,9 +16,6 @@
     var lstTrinhDo = (List<UTTUniversity.Models.tblTrinhDoHocVan>)Session["TrinhDo"];
 
 }
-
-
-
 
 
 @using (Html.BeginForm("Create", "NhanVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
