@@ -9,9 +9,7 @@ namespace UTTUniversity.Models
     [Table("tblNhaXuatBan")]
     public partial class tblNhaXuatBan
     {
-        public int ID { get; set; }
-
-        [Required]
+        [Key]
         [StringLength(50)]
         public string MA_NXB { get; set; }
 

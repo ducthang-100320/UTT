@@ -161,7 +161,6 @@
     <Compile Include="Models\tblAccountNhanVien.cs" />
     <Compile Include="Models\tblBanner.cs" />
     <Compile Include="Models\tblCategory.cs" />
-    <Compile Include="Models\tblChiTietMuonTra.cs" />
     <Compile Include="Models\tblChiTietPhieuNhap.cs" />
     <Compile Include="Models\tblChucVu.cs" />
     <Compile Include="Models\tblCoSo.cs" />

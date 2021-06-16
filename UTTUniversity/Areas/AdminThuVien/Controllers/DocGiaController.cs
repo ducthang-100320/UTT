@@ -17,7 +17,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             db = new CECMSDbContext();
             var sinhvien = db.tblSinhViens.Where(x => x.TINH_TRANG == 1).ToList();
 
-            var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV001")).ToList();
+            var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV01")).ToList();
 
             var loai = db.tblLoaiDocGias.Where(x => x.TRANG_THAI == 1);
             Session["loai"] = loai;

@@ -83,14 +83,14 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
 
         }
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
             db = new CECMSDbContext();
-            var model = db.tblTacGias.Find(id);
+            var model = db.tblTacGias.Where(x=>x.MA_TACGIA == id ).FirstOrDefault();
             return PartialView(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
 
             db = new CECMSDbContext();
@@ -101,7 +101,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         public ActionResult Edit(tblTacGia model, HttpPostedFile filePost, FormCollection collection)
         {
             db = new CECMSDbContext();
-            var item = db.tblTacGias.Find(model.ID);
+            var item = db.tblTacGias.Find(model.MA_TACGIA);
             item.TEN_TACGIA = model.TEN_TACGIA;
             item.MA_TACGIA = model.MA_TACGIA;
             item.MO_TA = model.MO_TA;
@@ -137,7 +137,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 item.GIOI_TINH = 0;
             }
 
-            var itemnxb = db.tblTacGias.Where(x => x.TRANG_THAI == 1 && x.ID != model.ID).ToList();
+            var itemnxb = db.tblTacGias.Where(x => x.TRANG_THAI == 1 && x.MA_TACGIA != model.MA_TACGIA).ToList();
             foreach (var itemTG in itemnxb)
             {
                 if (item.MA_TACGIA == itemTG.MA_TACGIA)
@@ -161,13 +161,13 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             db = new CECMSDbContext();
-            var item = db.tblTacGias.Find(id);
+            var item = db.tblTacGias.Where(x => x.MA_TACGIA == id).FirstOrDefault();
             if (item != null)
             {
-                db.tblTacGias.Remove(item);
+                item.TRANG_THAI = 0;
                 db.SaveChanges();
                 return RedirectToAction("Index", "TacGia");
             }

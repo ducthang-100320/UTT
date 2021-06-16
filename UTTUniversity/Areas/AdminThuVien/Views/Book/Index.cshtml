@@ -112,13 +112,13 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "Book", new { id = item.ID })">Edit</a>
+                                                            <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "Book", new { id = item.MA_SACH })">Edit</a>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "Book",new { id = item.ID })')">Details</a>
+                                                            <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "Book",new { id = item.MA_SACH })')">Details</a>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "Book",new { id = item.ID })">Delete</a>
+                                                            <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "Book",new { id = item.MA_SACH })">Delete</a>
                                                             @*@Html.ActionLink("Delete", "Delete", new { id = item.RoleID })*@
                                                         </div>
 
