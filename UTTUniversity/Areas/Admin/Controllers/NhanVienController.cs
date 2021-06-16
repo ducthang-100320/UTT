@@ -154,7 +154,6 @@ namespace UTTUniversity.Areas.Admin.Controllers
             var item1 = db.tblNhanViens.Find(id);
             var item2 = db.tblAccounts.Find(item1.Account_ID);
             tblAccountNhanVien model = new tblAccountNhanVien();
-            model.ID = item1.ID;
             model.AccoutName = item2.AccoutName;
             model.Account_ID = item2.ID;
             model.MA_NHANVIEN = item1.MA_NHANVIEN;
@@ -181,39 +180,39 @@ namespace UTTUniversity.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit(tblAccountNhanVien item, HttpPostedFile filePost, FormCollection collection)
+        public ActionResult Edit(tblAccountNhanVien model, HttpPostedFile filePost, FormCollection collection)
         {
 
 
             CECMSDbContext db = new CECMSDbContext();
-            var acc = db.tblAccounts.Find(item.Account_ID);
+            var acc = db.tblAccounts.Find(model.Account_ID);
 
-            acc.AccoutName = item.AccoutName;
-            acc.CreatedDate = item.CreatedDate;
-            acc.CreatedUser = item.CreatedUser;
-            acc.DateIssued = item.DateIssued;
+            acc.AccoutName = model.AccoutName;
+            acc.CreatedDate = model.CreatedDate;
+            acc.CreatedUser = model.CreatedUser;
+            acc.DateIssued = model.DateIssued;
             acc.ModifiedDate = DateTime.Now;
             acc.ModifiedUser = "ducthang";
             acc.CreatedDate = DateTime.Now;
             acc.CreatedUser = "ducthang";
-            acc.Password = item.Password;
+            acc.Password = model.Password;
             acc.Status = -1;
             //var uResult = db.SaveChanges();
-            var user = db.tblNhanViens.Where(x => x.Account_ID == item.Account_ID).SingleOrDefault();
-            user.HO_TEN = item.HO_TEN;
-            user.NGAY_SINH = item.NGAY_SINH;
+            var user = db.tblNhanViens.Where(x => x.Account_ID == model.Account_ID).SingleOrDefault();
+            user.HO_TEN = model.HO_TEN;
+            user.NGAY_SINH = model.NGAY_SINH;
           
             var GioiTinh = collection["customRadio"];
             if (collection["customRadio"].ToString().Trim() != "Nam")
-                item.GIOI_TINH = Convert.ToInt32(collection["customRadio"].ToString());
+                model.GIOI_TINH = Convert.ToInt32(collection["customRadio"].ToString());
             else
-                item.GIOI_TINH = 0;
+                model.GIOI_TINH = 0;
             //user.Sex = item.Sex;
             user.TRANGTHAI = -1;
-            user.DIA_CHI = item.DIA_CHI;
-            user.QUE_QUAN = item.QUE_QUAN;
-            user.Email = item.Email;
-            user.SO_DIENTHOAI = item.SO_DIENTHOAI;
+            user.DIA_CHI = model.DIA_CHI;
+            user.QUE_QUAN = model.QUE_QUAN;
+            user.Email = model.Email;
+            user.SO_DIENTHOAI = model.SO_DIENTHOAI;
             string filelocation = "";
             if (Request.Files["filePost"].ContentLength > 0)
             {
@@ -232,7 +231,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
                 }
                 else
                 {
-                    user.Image = item.Image;
+                    user.Image = model.Image;
                 }
 
 
