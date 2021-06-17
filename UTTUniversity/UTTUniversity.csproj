@@ -3334,6 +3334,9 @@
     <Content Include="Areas\AdminThuVien\Views\MuonDoc\Create.cshtml" />
     <Content Include="Areas\AdminThuVien\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminThuVien\Views\MuonDoc\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PhongBan\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PhongBan\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CoSoDaoTao\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

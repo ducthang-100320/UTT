@@ -17,8 +17,9 @@
 
         <div class="card">
             <div class="card-body">
-                @*<h4 class="card-title">Data Table</h4>
-                    <h6 class="card-subtitle">Data table example</h6>*@
+                <h4 class="card-title">Danh Sách Các Cơ Sở Đào Tạo</h4>
+                <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><a href="@Url.Action("Create","CoSoDaoTao")">Thêm mới</a> </button>
+        @*<h6 class="card-subtitle">Data table example</h6>*@
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table table-bordered table-striped">
                         <thead>
@@ -34,7 +35,7 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                STT ++;
+                                STT++;
                                 <tr>
                                     <td>@STT</td>
                                     <td>

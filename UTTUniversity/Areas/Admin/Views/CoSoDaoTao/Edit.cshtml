@@ -1,16 +1,19 @@
 ﻿@model UTTUniversity.Models.tblCoSo
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Edit";
+                Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("Create", "CoSoDaoTao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+@using (Html.BeginForm("Edit", "CoSoDaoTao", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="card">
         <div class="card-header">
-            <h5>Thêm Mới Cơ Sở</h5>
+            <h5>Chỉnh Sửa Thông Tin Cơ Sở</h5>
         </div>
         <div class="card-body table-border-style">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -72,6 +75,6 @@
     </div>
 }
 
+<div>
 
-
-
+</div>

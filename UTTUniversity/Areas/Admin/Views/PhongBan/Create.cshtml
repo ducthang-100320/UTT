@@ -1,59 +1,55 @@
-﻿@model UTTUniversity.Models.tblCoSo
+﻿@model UTTUniversity.Models.tblPhongBan
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("Create", "CoSoDaoTao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+@using (Html.BeginForm("Create", "PhongBan", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="card">
         <div class="card-header">
-            <h5>Thêm Mới Cơ Sở</h5>
+            <h5>Thêm Mới Phòng Ban</h5>
         </div>
         <div class="card-body table-border-style">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Mã Cơ Sở: <span class="label-required">*</span></label>
-                        @Html.EditorFor(model => model.MA_COSO, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.MA_COSO, "", new { @class = "text-danger" })
+                        <label>Mã Phòng Ban: <span class="label-required">*</span></label>
+                        @Html.EditorFor(model => model.MA_PHONGBAN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MA_PHONGBAN, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Tên Cơ Sở: <span class="label-required">*</span></label>
-                        @Html.EditorFor(model => model.TEN_COSO, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TEN_COSO, "", new { @class = "text-danger" })
+                        <label>Tên Phòng Ban: <span class="label-required">*</span></label>
+                        @Html.EditorFor(model => model.TEN_PHONGBAN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TEN_PHONGBAN, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-lg-4">
+            
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label>Số Điện Thoại: <span class="label-required">*</span></label>
                         @Html.EditorFor(model => model.SO_DTHOAI, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.SO_DTHOAI, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Email: <span class="label-required">*</span></label>
-                        @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>FAX: <span class="label-required">*</span></label>
-                        @Html.EditorFor(model => model.FAX, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.FAX, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label>Địa Chỉ: <span class="label-required">*</span></label>
+                        @Html.EditorFor(model => model.DIA_CHI, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DIA_CHI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Mô tả: <span class="label-required">*</span></label>
                         @Html.EditorFor(model => model.DIA_CHI, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.DIA_CHI, "", new { @class = "text-danger" })
                     </div>
@@ -72,6 +68,6 @@
     </div>
 }
 
+<div>
 
-
-
+</div>

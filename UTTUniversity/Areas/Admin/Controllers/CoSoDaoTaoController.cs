@@ -29,15 +29,16 @@ namespace UTTUniversity.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(tblCoSo model, FormCollection collection)
         {
+            db = new CECMSDbContext();
             db.tblCoSoes.Add(model);
             db.SaveChanges();
             return RedirectToAction("Index", "CoSoDaoTao");
         }
         [HttpGet]
-        public ActionResult Edit(string Ma_CoSo)
+        public ActionResult Edit(string id)
         {
             db = new CECMSDbContext();
-            var model = db.tblCoSoes.First(m => m.MA_COSO == Ma_CoSo);
+            var model = db.tblCoSoes.First(m => m.MA_COSO == id);
             return View(model);
         }
         [HttpPost]
@@ -47,6 +48,13 @@ namespace UTTUniversity.Areas.Admin.Controllers
 
 
             var item = db.tblCoSoes.Find(model.MA_COSO);
+            item.MA_COSO = model.MA_COSO;
+            item.TEN_COSO = model.TEN_COSO;
+            item.SO_DTHOAI = model.SO_DTHOAI;
+            item.DIA_CHI = model.DIA_CHI;
+            item.EMAIL = model.EMAIL;
+            item.FAX = model.FAX;
+            item.GHI_CHU = model.GHI_CHU;
             
             var Result = db.SaveChanges();
 
@@ -69,13 +77,13 @@ namespace UTTUniversity.Areas.Admin.Controllers
             var model = db.tblCoSoes.Find(MA_COSO);
             return PartialView(model);
         }
-        public ActionResult Delete(string Ma_COSO)
+        public ActionResult Delete(string id)
         {
             try
             {
                 db = new CECMSDbContext();
                 //var ID = Convert.ToInt32(id);
-                var item = db.tblCoSoes.Find(Ma_COSO);
+                var item = db.tblCoSoes.Find(id);
                 if (item != null)
                 {
                     db.tblCoSoes.Remove(item);
