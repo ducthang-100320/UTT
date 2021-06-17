@@ -8,14 +8,13 @@ namespace UTTUniversity.Models
     public partial class CECMSDbContext : DbContext
     {
         public CECMSDbContext()
-            : base("name=CECMSDbContext3")
+            : base("name=CECMSDbContext5")
         {
         }
 
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblAccount> tblAccounts { get; set; }
         public virtual DbSet<tblBanner> tblBanners { get; set; }
-        public virtual DbSet<tblChiTietMuonTra> tblChiTietMuonTras { get; set; }
         public virtual DbSet<tblChiTietPhieuNhap> tblChiTietPhieuNhaps { get; set; }
         public virtual DbSet<tblChucVu> tblChucVus { get; set; }
         public virtual DbSet<tblCoSo> tblCoSoes { get; set; }

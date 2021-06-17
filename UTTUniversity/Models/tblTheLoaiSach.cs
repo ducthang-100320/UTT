@@ -9,9 +9,7 @@ namespace UTTUniversity.Models
     [Table("tblTheLoaiSach")]
     public partial class tblTheLoaiSach
     {
-        public int ID { get; set; }
-
-        [Required]
+        [Key]
         [StringLength(50)]
         public string MA_THELOAI { get; set; }
 

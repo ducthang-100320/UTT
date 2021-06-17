@@ -54,31 +54,31 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             }
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
             db = new CECMSDbContext();
-            var model = db.tblTheLoaiSaches.Find(id);
+            var model = db.tblTheLoaiSaches.Where(x => x.MA_THELOAI == id).FirstOrDefault();
             return PartialView(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
 
             db = new CECMSDbContext();
-            var model = db.tblTheLoaiSaches.Find(id);
+            var model = db.tblTheLoaiSaches.Where(x => x.MA_THELOAI == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
         public ActionResult Edit(tblTheLoaiSach model, FormCollection collection)
         {
             db = new CECMSDbContext();
-            var item = db.tblTheLoaiSaches.Find(model.ID);
+            var item = db.tblTheLoaiSaches.Find(model.MA_THELOAI);
 
             item.TEN_THELOAI = model.TEN_THELOAI;
             item.MA_THELOAI = model.MA_THELOAI;
 
 
-            var itemtl = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1 && x.ID != model.ID).ToList();
+            var itemtl = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1 && x.MA_THELOAI != model.MA_THELOAI).ToList();
             foreach (var itemNXB in itemtl)
             {
                 if (item.MA_THELOAI == itemNXB.MA_THELOAI)
@@ -102,10 +102,10 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             db = new CECMSDbContext();
-            var item = db.tblTheLoaiSaches.Find(id);
+            var item = db.tblTheLoaiSaches.Where(x => x.MA_THELOAI == id).FirstOrDefault();
             if (item != null)
             {
                 item.TRANG_THAI = 0;

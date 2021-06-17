@@ -20,8 +20,8 @@ namespace UTTUniversity.Models
         public DateTime NGAY_NHAP { get; set; }
 
         [Required]
-        [StringLength(300)]
-        public string NHA_CUNGCAP { get; set; }
+        [StringLength(50)]
+        public string MA_NXB { get; set; }
 
         public int TRANG_THAI { get; set; }
 

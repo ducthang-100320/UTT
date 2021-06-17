@@ -16,13 +16,13 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         {
 
             db = new CECMSDbContext();
-            var listTheLoai = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1);
+            var listTheLoai = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI >= 0);
             Session["TheloaiSach"] = listTheLoai;
 
-            var listNXB = db.tblNhaXuatBans.Where(x => x.TRANGTHAI == 1);
+            var listNXB = db.tblNhaXuatBans.Where(x => x.TRANGTHAI >= 1);
             Session["NXB"] = listNXB;
 
-            var listTacGia = db.tblTacGias.Where(x => x.TRANG_THAI == 1);
+            var listTacGia = db.tblTacGias.Where(x => x.TRANG_THAI >= 1);
             Session["TacGia"] = listTacGia;
 
             if (!string.IsNullOrEmpty(searchString))
@@ -156,12 +156,12 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
         }
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
 
             db = new CECMSDbContext();
             setControl();
-            var model = db.tblSaches.Find(id);
+            var model = db.tblSaches.Where(x => x.MA_SACH == id).FirstOrDefault();
 
             return View(model);
         }
@@ -169,8 +169,8 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         public ActionResult Edit(tblSach model, HttpPostedFile filePost, FormCollection collection)
         {
             setControl();
-            var itemS = db.tblSaches.Find(model.ID);
-            var item = db.tblSaches.Where(x => x.TRANG_THAI == 1 && x.ID != model.ID).ToList();
+            var itemS = db.tblSaches.Where(x => x.MA_SACH == model.MA_SACH).FirstOrDefault();
+            var item = db.tblSaches.Where(x => x.TRANG_THAI == 1 && x.MA_SACH != model.MA_SACH).ToList();
 
             itemS.MA_SACH = model.MA_SACH;
             itemS.TEN_SACH = model.TEN_SACH;
@@ -202,7 +202,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             var result = false;
             foreach (var itemSach in item)
             {
-                if (model.MA_SACH == itemSach.MA_SACH)
+                if (model.MA_SACH == itemSach.MA_SACH  )
                 {
                     result = false;
                     break;
@@ -247,11 +247,11 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
             setControl();
             db = new CECMSDbContext();
-            var model = db.tblSaches.Find(id);
+            var model = db.tblSaches.Where(x => x.MA_SACH == id).FirstOrDefault();
             return PartialView(model);
         }
     }

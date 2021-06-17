@@ -50,9 +50,9 @@
                             @Html.DisplayFor(modelItem => item.DIA_CHI)
                         </td>
                         <td>
-                            <a href="@Url.Action("Edit", "NXB" , new {id = item.ID })" class="btn btn-outline-info" style="float:left">Sửa</a>
-                            <a href="#" class="btn btn-outline-info" style="float:left" onclick="CreateModal('@Url.Action("Details", "NXB" , new {id = item.ID })')">Chi tiết</a>
-                            <a class="btn btn-outline-info" style="float:left" href="@Url.Action("Delete", "NXB", new { id = item.ID})" onclick="return ConfirmDelete();">Xóa</a>
+                            <a href="@Url.Action("Edit", "NXB" , new {id = item.MA_NXB })" class="btn btn-outline-info" style="float:left">Sửa</a>
+                            <a href="#" class="btn btn-outline-info" style="float:left" onclick="CreateModal('@Url.Action("Details", "NXB" , new {id = item.MA_NXB })')">Chi tiết</a>
+                            <a class="btn btn-outline-info" style="float:left" href="@Url.Action("Delete", "NXB", new { id = item.MA_NXB})" onclick="return ConfirmDelete();">Xóa</a>
                         </td>
 
                     </tr>

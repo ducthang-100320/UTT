@@ -9,9 +9,7 @@ namespace UTTUniversity.Models
     [Table("tblTacGia")]
     public partial class tblTacGia
     {
-        public int ID { get; set; }
-
-        [Required]
+        [Key]
         [StringLength(50)]
         public string MA_TACGIA { get; set; }
 
@@ -23,11 +21,8 @@ namespace UTTUniversity.Models
         [StringLength(200)]
         public string IMAGE { get; set; }
 
-        
         public int GIOI_TINH { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
         public DateTime NGAYSINH { get; set; }
 
         public string MO_TA { get; set; }

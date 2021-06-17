@@ -9,9 +9,10 @@ namespace UTTUniversity.Models
     [Table("tblSach")]
     public partial class tblSach
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [Required]
+        [Key]
         [StringLength(50)]
         public string MA_SACH { get; set; }
 
@@ -26,7 +27,6 @@ namespace UTTUniversity.Models
         [Required]
         [StringLength(50)]
         public string MA_THELOAI { get; set; }
-
 
         public int SO_LUONG { get; set; }
 

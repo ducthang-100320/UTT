@@ -54,25 +54,25 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
 
         }
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
             db = new CECMSDbContext();
-            var model = db.tblNhaXuatBans.Find(id);
+            var model = db.tblNhaXuatBans.Where(x => x.MA_NXB == id).FirstOrDefault();
             return PartialView(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
 
             db = new CECMSDbContext();
-            var model = db.tblNhaXuatBans.Find(id);
+            var model = db.tblNhaXuatBans.Where(x => x.MA_NXB == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
         public ActionResult Edit(tblNhaXuatBan model, FormCollection collection)
         {
             db = new CECMSDbContext();
-            var item = db.tblNhaXuatBans.Find(model.ID);
+            var item = db.tblNhaXuatBans.Find(model.MA_NXB);
 
             item.TEN_NXB = model.TEN_NXB;
             item.MA_NXB = model.MA_NXB;
@@ -80,7 +80,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             item.GHI_CHU = model.GHI_CHU;
             item.SO_DTHOAI = model.SO_DTHOAI;
 
-            var itemnxb = db.tblNhaXuatBans.Where(x => x.TRANGTHAI == 1 && x.ID != model.ID).ToList();
+            var itemnxb = db.tblNhaXuatBans.Where(x => x.TRANGTHAI == 1 && x.MA_NXB != model.MA_NXB).ToList();
             foreach (var itemNXB in itemnxb)
             {
                 if (item.MA_NXB == itemNXB.MA_NXB)
@@ -104,13 +104,13 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             db = new CECMSDbContext();
-            var item = db.tblNhaXuatBans.Find(id);
+            var item = db.tblNhaXuatBans.Where(x => x.MA_NXB == id).FirstOrDefault();
             if (item != null)
             {
-                db.tblNhaXuatBans.Remove(item);
+                item.TRANGTHAI = 0;
                 db.SaveChanges();
                 return RedirectToAction("Index", "NXB");
             }

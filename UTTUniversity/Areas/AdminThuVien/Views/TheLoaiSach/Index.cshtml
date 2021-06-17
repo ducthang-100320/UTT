@@ -43,9 +43,9 @@
                         </td>
 
                         <td>
-                            <a href="@Url.Action("Edit", "TheLoaiSach" , new {id = item.ID })" class="btn btn-outline-info" style="float:left">Sửa</a>
-                            <a href="#" class="btn btn-outline-info" style="float:left" onclick="CreateModal('@Url.Action("Details", "TheLoaiSach" , new {id = item.ID })')">Chi tiết</a>
-                            <a class="btn btn-outline-info" style="float:left" href="@Url.Action("Delete", "TheLoaiSach", new { id = item.ID})" onclick="return ConfirmDelete();">Xóa</a>
+                            <a href="@Url.Action("Edit", "TheLoaiSach" , new {id = item.MA_THELOAI })" class="btn btn-outline-info" style="float:left">Sửa</a>
+                            <a href="#" class="btn btn-outline-info" style="float:left" onclick="CreateModal('@Url.Action("Details", "TheLoaiSach" , new {id = item.MA_THELOAI })')">Chi tiết</a>
+                            <a class="btn btn-outline-info" style="float:left" href="@Url.Action("Delete", "TheLoaiSach", new { id = item.MA_THELOAI})" onclick="return ConfirmDelete();">Xóa</a>
                         </td>
 
                     </tr>

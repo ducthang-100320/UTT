@@ -9,9 +9,10 @@ namespace UTTUniversity.Models
     [Table("tblNhanVien")]
     public partial class tblNhanVien
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [Required]
+        [Key]
         [StringLength(50)]
         public string MA_NHANVIEN { get; set; }
 
