@@ -19,14 +19,15 @@
         [StringLength(50)]
         public string MA_DOCGIA { get; set; }
 
-        [Required(ErrorMessage = "Yêu cầu nhập ngày mượn")]
+        [Required(ErrorMessage = "Yêu cầu nhập ngày ")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NGAY_MUON { get; set; }
 
         [Required(ErrorMessage ="Yêu cầu nhập số lượng")]
         public int SO_LUONG { get; set; }
 
-        [Required(ErrorMessage = "Yêu cầu nhập ngày trả")]
+        [Required(ErrorMessage = "Yêu cầu nhập ngày ")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NGAY_TRA { get; set; }

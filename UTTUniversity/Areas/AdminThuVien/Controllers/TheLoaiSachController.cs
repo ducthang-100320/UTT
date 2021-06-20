@@ -22,13 +22,21 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            db = new CECMSDbContext();
+            int STT  = db.tblTheLoaiSaches.Count();
+            STT++;
+            var model = new tblTheLoaiSach();
+            model.MA_THELOAI = "TL00" + STT;
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Create(tblTheLoaiSach model, FormCollection collection)
         {
             db = new CECMSDbContext();
+            int STT = db.tblTheLoaiSaches.Count();
+            STT++;
+            model.MA_THELOAI = "TL00" + STT;
             model.TRANG_THAI = 1;
             var item = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1).ToList();
             foreach (var itemNXB in item)
@@ -66,6 +74,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
             db = new CECMSDbContext();
             var model = db.tblTheLoaiSaches.Where(x => x.MA_THELOAI == id).FirstOrDefault();
+            Session["Ma_Trung"] = model;
             return View(model);
         }
         [HttpPost]
@@ -73,21 +82,21 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         {
             db = new CECMSDbContext();
             var item = db.tblTheLoaiSaches.Find(model.MA_THELOAI);
-
+            var Tloai = Session["Ma_Trung"] as UTTUniversity.Models.tblTheLoaiSach;
             item.TEN_THELOAI = model.TEN_THELOAI;
-            item.MA_THELOAI = model.MA_THELOAI;
+            item.MA_THELOAI = Tloai.MA_THELOAI;
 
 
-            var itemtl = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1 && x.MA_THELOAI != model.MA_THELOAI).ToList();
-            foreach (var itemNXB in itemtl)
-            {
-                if (item.MA_THELOAI == itemNXB.MA_THELOAI)
-                {
-                    ModelState.AddModelError("", "Mã đã tồn tại");
-                    break;
-                }
+            //var itemtl = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1 && x.MA_THELOAI != model.MA_THELOAI).ToList();
+            //foreach (var itemNXB in itemtl)
+            //{
+            //    if (item.MA_THELOAI == itemNXB.MA_THELOAI)
+            //    {
+            //        ModelState.AddModelError("", "Mã đã tồn tại");
+            //        break;
+            //    }
 
-            }
+            //}
 
             if (ModelState.IsValid)
             {

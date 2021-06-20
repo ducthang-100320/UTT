@@ -1,4 +1,4 @@
-namespace UTTUniversity.Models
+﻿namespace UTTUniversity.Models
 {
     using System;
     using System.Collections.Generic;
@@ -29,6 +29,9 @@ namespace UTTUniversity.Models
 
         public int GIOI_TINH { get; set; }
 
+        [Required(ErrorMessage = "Yêu cầu nhập ngày ")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NGAY_SINH { get; set; }
 
         [Required]

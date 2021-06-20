@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<UTTUniversity.Models.tblSach>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý sách";
     Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
 }
 
@@ -27,7 +27,7 @@
                             {
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <h4>Sách trong thư viện </h4>
+                                        <h4>Quản lý sách trong thư viện </h4>
                                     </div>
                                     <div class="col-lg-3">
                                         <a href="@Url.Action("Create", "Book")" style="float:left" class="btn btn-sm btn-primary btn-header">Thêm mới</a>
@@ -115,7 +115,7 @@
                                                             <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "Book", new { id = item.MA_SACH })">Edit</a>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "Book",new { id = item.MA_SACH })')">Details</a>
+                                                            <a class="btn btn-outline-info" style="float:right"  onclick="CreateModal('@Url.Action("Details", "Book",new { id = item.MA_SACH })')" href="#">Details</a>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "Book",new { id = item.MA_SACH })">Delete</a>
@@ -134,5 +134,19 @@
                 </div>
             </div>
         </div>
+
+    </div>
+    <div class="modal fade" id="myModal2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modelContent2">
+            </div>
+        </div>
     </div>
 </body>
+<script>
+    function CreateModal(url) {
+        $('#modelContent2').load(url);
+        $('#myModal2').modal('show');
+    }
+
+</script>

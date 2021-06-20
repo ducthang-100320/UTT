@@ -266,6 +266,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         {
             db = new CECMSDbContext();
             var model = db.tblMuonTras.Find(id);
+           
 
             return View(model);
         }
@@ -360,9 +361,17 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 ModelState.AddModelError("", "Ngày trả phải lớn hơn ngày mượn");
                 return View();
             }
-
-            muontra_edit.SO_LUONG = model.SO_LUONG;
+           
+            if(collection["customRadio"].ToString().Equals("Đã trả") && muontra_edit.GHI_CHU.Equals("Đã trả"))
+            {
+                sach.SO_LUONG = sach.SO_LUONG;
+            }
+            else
+            {
+                sach.SO_LUONG = sach.SO_LUONG + muontra_edit.SO_LUONG;
+            }
             muontra_edit.GHI_CHU = collection["customRadio"].ToString();
+            muontra_edit.SO_LUONG = model.SO_LUONG;
             muontra_edit.MA_DOCGIA = model.MA_DOCGIA;
             muontra_edit.MA_SACH = model.MA_SACH;
             muontra_edit.NGAY_MUON = model.NGAY_MUON;
@@ -388,6 +397,18 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
         }
 
-
+        public ActionResult Delete(int id)
+        {
+            db = new CECMSDbContext();
+            var model = db.tblMuonTras.Find(id);
+            if (model != null)
+            {
+                model.TRANG_THAI = 0;
+                db.SaveChanges();
+                return RedirectToAction("IndexMuonTra", "MuonDoc");
+            }
+            else
+            return View();
+        }
     }
 }

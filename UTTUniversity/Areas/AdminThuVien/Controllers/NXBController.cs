@@ -21,24 +21,32 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            db = new CECMSDbContext();
+            int STT = db.tblNhaXuatBans.Count();
+            STT++;
+            var model = new tblNhaXuatBan();
+            model.MA_NXB = "NXB00"+STT;
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Create(tblNhaXuatBan model, FormCollection collection)
         {
             db = new CECMSDbContext();
+            int STT = db.tblNhaXuatBans.Count();
+            STT++;
+            model.MA_NXB = "NXB00" + STT;
             model.TRANGTHAI = 1;
             var item = db.tblNhaXuatBans.Where(x => x.TRANGTHAI == 1).ToList();
-            foreach (var itemNXB in item)
-            {
-                if (model.MA_NXB == itemNXB.MA_NXB)
-                {
-                    ModelState.AddModelError("", "Mã đã tồn tại");
-                    break;
-                }
+            //foreach (var itemNXB in item)
+            //{
+            //    if (model.MA_NXB == itemNXB.MA_NXB)
+            //    {
+            //        ModelState.AddModelError("", "Mã đã tồn tại");
+            //        break;
+            //    }
 
-            }
+            //}
 
             if (ModelState.IsValid)
             {
@@ -58,6 +66,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         {
             db = new CECMSDbContext();
             var model = db.tblNhaXuatBans.Where(x => x.MA_NXB == id).FirstOrDefault();
+           
             return PartialView(model);
         }
 
@@ -66,30 +75,32 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
             db = new CECMSDbContext();
             var model = db.tblNhaXuatBans.Where(x => x.MA_NXB == id).FirstOrDefault();
+            Session["Ma_Trung"] = model;
             return View(model);
         }
         [HttpPost]
         public ActionResult Edit(tblNhaXuatBan model, FormCollection collection)
         {
             db = new CECMSDbContext();
-            var item = db.tblNhaXuatBans.Find(model.MA_NXB);
+            var NXB = Session["Ma_Trung"] as UTTUniversity.Models.tblNhaXuatBan;
+            var item = db.tblNhaXuatBans.Find(NXB.MA_NXB);
 
             item.TEN_NXB = model.TEN_NXB;
-            item.MA_NXB = model.MA_NXB;
+            item.MA_NXB = NXB.MA_NXB;
             item.DIA_CHI = model.DIA_CHI;
             item.GHI_CHU = model.GHI_CHU;
             item.SO_DTHOAI = model.SO_DTHOAI;
 
-            var itemnxb = db.tblNhaXuatBans.Where(x => x.TRANGTHAI == 1 && x.MA_NXB != model.MA_NXB).ToList();
-            foreach (var itemNXB in itemnxb)
-            {
-                if (item.MA_NXB == itemNXB.MA_NXB)
-                {
-                    ModelState.AddModelError("", "Mã đã tồn tại");
-                    break;
-                }
+            //var itemnxb = db.tblNhaXuatBans.Where(x => x.TRANGTHAI == 1 && x.MA_NXB != model.MA_NXB).ToList();
+            //foreach (var itemNXB in itemnxb)
+            //{
+            //    if (item.MA_NXB == itemNXB.MA_NXB)
+            //    {
+            //        ModelState.AddModelError("", "Mã đã tồn tại");
+            //        break;
+            //    }
 
-            }
+            //}
 
             if (ModelState.IsValid)
             {

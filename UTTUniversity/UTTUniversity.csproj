@@ -135,10 +135,10 @@
     <Compile Include="Areas\AdminThuVien\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\LoginController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\MuonDocController.cs" />
+    <Compile Include="Areas\AdminThuVien\Controllers\NhapSachController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\NXBController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\TacGiaController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\TheLoaiSachController.cs" />
-    <Compile Include="Areas\AdminThuVien\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CoSoDaoTaoController.cs" />
     <Compile Include="Areas\Admin\Controllers\DanhMucController.cs" />
@@ -3332,6 +3332,7 @@
     <Content Include="Areas\AdminThuVien\Views\MuonDoc\Create.cshtml" />
     <Content Include="Areas\AdminThuVien\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminThuVien\Views\MuonDoc\Edit.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NhapSach\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

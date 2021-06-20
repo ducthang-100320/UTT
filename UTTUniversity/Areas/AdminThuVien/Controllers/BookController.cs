@@ -84,9 +84,13 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         }
         public ActionResult Create()
         {
-
+            db = new CECMSDbContext();
             setControl();
-            return View();
+            int STT = db.tblSaches.Count();
+            STT++;
+            var model = new tblSach();
+            model.MA_SACH = "MS00" + STT;
+            return View(model);
         }
 
         [HttpPost]
@@ -94,6 +98,8 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         public ActionResult Create(tblSach model, HttpPostedFile filePost, FormCollection collection)
         {
             setControl();
+            int STT = db.tblSaches.Count();
+            STT++;
             string fileLocation = "";
             if (Request.Files["filePost"].ContentLength <= 0) { model.IMAGE = ""; }
             ModelState["filePost"].Errors.Clear();
@@ -110,38 +116,39 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 }
                 Request.Files["filePost"].SaveAs(fileLocation);
             }
+            model.MA_SACH = "MS00" + STT;
             model.MA_NXB = collection["cboNXB"].ToString();
             model.MA_TACGIA = collection["cboTacGia"].ToString();
             model.MA_THELOAI = collection["cboTLoai"].ToString();
-            model.MO_TA = "1";
             model.TRANG_THAI = 1;
             int iContent = fileLocation.IndexOf("Content");
             if (iContent > 0)
             {
                 model.IMAGE = @"\" + fileLocation.Substring(iContent, fileLocation.Length - iContent);
             }
-            db = new CECMSDbContext();
-            var item = db.tblSaches.Where(x => x.TRANG_THAI == 1).ToList();
-            var result = false;
-            foreach (var itemSach in item)
-            {
-                if (model.MA_SACH == itemSach.MA_SACH)
-                {
-                    result = false;
-                    break;
-                }
-                else
-                {
-                    result = true;
-                }
-            }
-            if (result == false)
-            {
-                ModelState.AddModelError("", "Mã sách đã tồn tại");
-                setControl();
-                return View();
-            }
-            else if (collection["cboNXB"].ToString() == "-1" || collection["cboTacGia"].ToString() == "-1" || collection["cboTLoai"].ToString() == "-1" || model.MA_SACH == null)
+            //db = new CECMSDbContext();
+            //var item = db.tblSaches.Where(x => x.TRANG_THAI == 1).ToList();
+            //var result = false;
+            //foreach (var itemSach in item)
+            //{
+            //    if (model.MA_SACH == itemSach.MA_SACH)
+            //    {
+            //        result = false;
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        result = true;
+            //    }
+            //}
+            //if (result == false)
+            //{
+            //    ModelState.AddModelError("", "Mã sách đã tồn tại");
+            //    setControl();
+            //    return View();
+            //}
+            //else 
+            if (collection["cboNXB"].ToString() == "-1" || collection["cboTacGia"].ToString() == "-1" || collection["cboTLoai"].ToString() == "-1" )
             {
                 ModelState.AddModelError("", "Lỗi kiểm tra dữ liệu");
                 setControl();
@@ -155,6 +162,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             }
 
         }
+
         [HttpGet]
         public ActionResult Edit(string id)
         {
@@ -162,22 +170,24 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             db = new CECMSDbContext();
             setControl();
             var model = db.tblSaches.Where(x => x.MA_SACH == id).FirstOrDefault();
-
+            Session["Ma_Trung"] = model;
             return View(model);
         }
         [HttpPost]
         public ActionResult Edit(tblSach model, HttpPostedFile filePost, FormCollection collection)
         {
             setControl();
-            var itemS = db.tblSaches.Where(x => x.MA_SACH == model.MA_SACH).FirstOrDefault();
-            var item = db.tblSaches.Where(x => x.TRANG_THAI == 1 && x.MA_SACH != model.MA_SACH).ToList();
+            var Sach = Session["Ma_Trung"] as UTTUniversity.Models.tblSach;
+            var itemS = db.tblSaches.Where(x => x.MA_SACH == Sach.MA_SACH).FirstOrDefault();
+            var item = db.tblSaches.Where(x => x.TRANG_THAI == 1 && x.MA_SACH != Sach.MA_SACH).ToList();
 
-            itemS.MA_SACH = model.MA_SACH;
+            itemS.MA_SACH = Sach.MA_SACH;
             itemS.TEN_SACH = model.TEN_SACH;
             itemS.MA_NXB = collection["cboNXB"].ToString();
             itemS.MA_THELOAI = collection["cboTLoai"].ToString();
             itemS.MA_TACGIA = collection["cboTacGia"].ToString();
             itemS.SO_LUONG = model.SO_LUONG;
+            itemS.MO_TA = model.MO_TA;
             string fileLocation = "";
             if (Request.Files["filePost"].ContentLength <= 0) { itemS.IMAGE = model.IMAGE; }
             ModelState["filePost"].Errors.Clear();
@@ -199,26 +209,27 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             {
                 itemS.IMAGE = @"\" + fileLocation.Substring(iContent, fileLocation.Length - iContent);
             }
-            var result = false;
-            foreach (var itemSach in item)
-            {
-                if (model.MA_SACH == itemSach.MA_SACH  )
-                {
-                    result = false;
-                    break;
-                }
-                else
-                {
-                    result = true;
-                }
-            }
-            if (result == false)
-            {
-                ModelState.AddModelError("", "Mã sách đã tồn tại");
-                setControl();
-                return View(model);
-            }
-            else if (collection["cboNXB"].ToString() == "-1" || collection["cboTacGia"].ToString() == "-1" || collection["cboTLoai"].ToString() == "-1" || model.MA_SACH == null)
+            //var result = false;
+            //foreach (var itemSach in item)
+            //{
+            //    if (model.MA_SACH == itemSach.MA_SACH  )
+            //    {
+            //        result = false;
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        result = true;
+            //    }
+            //}
+            //if (result == false)
+            //{
+            //    ModelState.AddModelError("", "Mã sách đã tồn tại");
+            //    setControl();
+            //    return View(model);
+            //}
+            //else
+            if (collection["cboNXB"].ToString() == "-1" || collection["cboTacGia"].ToString() == "-1" || collection["cboTLoai"].ToString() == "-1")
             {
                 ModelState.AddModelError("", "Lỗi kiểm tra dữ liệu");
                 setControl();
@@ -253,6 +264,23 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             db = new CECMSDbContext();
             var model = db.tblSaches.Where(x => x.MA_SACH == id).FirstOrDefault();
             return PartialView(model);
+        }
+        public ActionResult Delete(string id)
+        {
+          
+            db = new CECMSDbContext();
+            var model = db.tblSaches.Where(x => x.MA_SACH == id).FirstOrDefault();
+            if(model!= null)
+            {
+                model.TRANG_THAI = 0;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Book");
+            }
+            else
+            {
+                return View();
+            }
+           
         }
     }
 }

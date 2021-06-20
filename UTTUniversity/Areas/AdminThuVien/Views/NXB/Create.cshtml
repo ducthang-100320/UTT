@@ -32,7 +32,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Mã nhà xuất bản: <span class="label-required">*</span></label>
-                            @Html.EditorFor(model => model.MA_NXB, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.MA_NXB, new { htmlAttributes = new { @class = "form-control" ,@disabled = "disabled " } })
                             @Html.ValidationMessageFor(model => model.MA_NXB, "", new { @class = "text-danger" })
                         </div>
                     </div>

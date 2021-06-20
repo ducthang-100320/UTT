@@ -5,7 +5,7 @@
     Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
     var searchString = "";
 }
-
+<link href="~/Areas/AdminThuVien/assets/dist/css/pages/stylish-tooltip.css" rel="stylesheet" />
 
 <div class="row">
     <div class="row el-element-overlay">
@@ -31,14 +31,14 @@
 
                 </div>
             }
-            </div>
+        </div>
         @foreach (var item in Model)
         {
             <div class="col-lg-3 col-md-6">
                 <div class="card">
-                    <div class="el-card-item">
+                    <div class="el-card-item" style="background-color:#78ebe6">
                         <div class="el-card-avatar el-overlay-1">
-                            <img src="@item.IMAGE" alt="user" style="height: 155px; width:233px" />
+                            <img src="@item.IMAGE" alt="user" style="height: 165px; width:100%" />
                             <div class="el-overlay">
                                 <ul class="el-info">
                                     <li><a class="btn default btn-outline " onclick="CreateModal('@Url.Action("Details", "Book" , new {id = item.MA_SACH })')"><i class="icon-magnifier"></i></a></li>
@@ -48,6 +48,23 @@
                         </div>
                         <div class="el-card-content">
                             <h3 class="box-title">@item.TEN_SACH</h3> <small>Sô Lượng: @item.SO_LUONG</small>
+                            <div class="collapse m-t-15" id="tt1" aria-expanded="true">
+                                <code>
+                                    &lt;span class="mytooltip tooltip-effect-1"&gt;
+                                    &lt;span class="tooltip-item"&gt;Mô tả&lt;/span&gt;
+                                    &lt;span class="tooltip-content clearfix"&gt;
+                                    &lt;img src="@item.IMAGE" /&gt;
+                                    &lt;span class="tooltip-text">@item.MO_TA&lt;/span&gt;
+                                    &lt;/span&gt;
+                                    &lt;/span&gt;
+                                </code>
+                            </div>
+                            <span class="mytooltip tooltip-effect-1">
+                                <span class="tooltip-item">Mô tả</span> <span class="tooltip-content clearfix">
+                                    <img src="@item.IMAGE" alt="euclid" /><span class="tooltip-text">@item.MO_TA</span>
+                                </span>
+                            </span>
+
                             <br />
                         </div>
                     </div>
@@ -65,7 +82,7 @@
                 // Create numeric links
                 var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
                 var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
-                var link = "/AdminThuVen/Book/IndexUser";
+                var link = "/AdminThuVien/Book/IndexUser";
 
                 <ul class="pagination">
                     @if (currentPage > ViewBag.First)

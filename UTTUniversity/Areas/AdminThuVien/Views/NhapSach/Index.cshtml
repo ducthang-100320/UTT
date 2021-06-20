@@ -1,13 +1,11 @@
-﻿@model IEnumerable<UTTUniversity.Models.tblDocGia>
+﻿@model IEnumerable<UTTUniversity.Models.tblPhieuNhapSach>
 
 @{
-    ViewBag.Title = "Danh mục đọc giả";
+    ViewBag.Title = "Index";
     Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
 }
-
 @{
     int STT = 0;
-    var modelTheLoai = (IEnumerable<UTTUniversity.Models.tblLoaiDocGia>)Session["loai"];
 
 }
 <div class="card">
@@ -22,9 +20,9 @@
                         <th>Tên đọc giả</th>
                         <th>Mã thẻ</th>
                         <th>Ngày sinh</th>
-                        <th>Loại</th>
-                        <th>Số điện thoại</th>
-                        @*<th>Tùy chọn</th>*@
+                        @*<th>Loại</th>
+                        <th>Số điện thoại</th>*@
+                        <th>Tùy chọn</th>
 
                     </tr>
                 </thead>
@@ -38,40 +36,40 @@
                             </td>
 
                             <td>
-                                @Html.DisplayFor(modelItem => item.MA_DOCGIA)
+                                @Html.DisplayFor(modelItem => item.MA_PHIEU)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TEN_DOCGIA)
+                                @Html.DisplayFor(modelItem => item.MA_NHANVIEN)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.MA_THE)
+                                @Html.DisplayFor(modelItem => item.MA_NXB)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.NGAY_SINH)
+                                @Html.DisplayFor(modelItem => item.NGAY_NHAP)
                             </td>
                             <td>
-                                @foreach (var itemTloai in modelTheLoai)
+                                @*@foreach (var itemTloai in modelTheLoai)
                                 {
                                     if (item.MA_LOAI == itemTloai.MA_LOAI)
                                     {
                                         @Html.DisplayFor(modelItem => itemTloai.TEN_LOAI)
                                     }
-                                }
+                                }*@
 
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.SO_DTHOAI)
+                                @*@Html.DisplayFor(modelItem => item.SO_DTHOAI)*@
                             </td>
-                            @*<td>
+                            <td>
 
-                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "DocGia", new { id = item.ID })">Edit</a>
+                                    <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "DocGia", new { id = item.MA_PHIEU })">Edit</a>
 
-                                <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "DocGia",new { id = item.ID })')">Details</a>
+                                    <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "DocGia",new { id = item.MA_PHIEU })')">Details</a>
 
-                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "DocGia",new { id = item.ID })">Delete</a>
-                                @Html.ActionLink("Delete", "Delete", new { id = item.RoleID })
+                                    <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "DocGia",new { id = item.MA_PHIEU })">Delete</a>
+                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.RoleID })*@
 
-                            </td>*@
+                                </td>
                         </tr>
                     }
 
