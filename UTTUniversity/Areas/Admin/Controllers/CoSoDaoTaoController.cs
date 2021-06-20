@@ -30,9 +30,25 @@ namespace UTTUniversity.Areas.Admin.Controllers
         public ActionResult Create(tblCoSo model, FormCollection collection)
         {
             db = new CECMSDbContext();
+            var coso = db.tblCoSoes.Where(x => x.MA_COSO.Equals(model.MA_COSO) || x.TEN_COSO.Equals(model.TEN_COSO) && x.TRANG_THAI == 1).ToList();
+            foreach (var item in coso)
+            {
+                if (model.MA_COSO.Equals(item.MA_COSO))
+                {
+                    ViewBag.Error = "Mã cơ sở đã tồn tại";
+                    return View();
+                }
+                else if (model.TEN_COSO.Equals(item.TEN_COSO))
+                {
+                    ViewBag.ErrorName = "Tên Cơ Sở đã tồn tại";
+                    return View();
+                }
+            }
             db.tblCoSoes.Add(model);
             db.SaveChanges();
             return RedirectToAction("Index", "CoSoDaoTao");
+
+
         }
         [HttpGet]
         public ActionResult Edit(string id)
@@ -73,6 +89,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
         }
         public ActionResult Details(string MA_COSO)
         {
+
             db = new CECMSDbContext();
             var model = db.tblCoSoes.Find(MA_COSO);
             return PartialView(model);

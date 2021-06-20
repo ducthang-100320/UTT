@@ -33,7 +33,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Thông tin tài khoản hoặc mật khẩu không chính xác");
+                ViewBag.Error = "Thông tin tài khoản hoặc mật khẩu không chính xác";
                 return View();
             }
 

@@ -76,6 +76,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(tblAccountNhanVien model, HttpPostedFile filePost, FormCollection collection)
         {
+            CECMSDbContext db = new CECMSDbContext();
                 string fileLocation = "";
                 if (Request.Files["filePost"].ContentLength <= 0) { model.Image = ""; }
                 //model.Image = "../assets/images/user_pic.jfif";
@@ -93,9 +94,19 @@ namespace UTTUniversity.Areas.Admin.Controllers
                         Request.Files["filePost"].SaveAs(fileLocation);
 
                     }
-
+                
                     tblAccount accItem = new tblAccount();
+                     
+                    var acc = db.tblAccounts.Where(x => x.AccoutName.Equals(model.AccoutName)).ToList();
+                    foreach (var itemacc in acc)
+                    {
+                        if (model.AccoutName.Equals(itemacc.AccoutName))
+                        {
+                            ViewBag.ErrorAccount = "Tên tài khoản này đã tồn tại trong hệ thống";
+                            return View();
+                        }
 
+                    }
                     accItem.AccoutName = model.AccoutName;
                     accItem.CreatedDate = DateTime.Now;
                     accItem.CreatedUser = "ducthang";
@@ -104,10 +115,20 @@ namespace UTTUniversity.Areas.Admin.Controllers
                     accItem.ModifiedUser = "ducthang";
                     accItem.Password = model.Password;
                     accItem.Status = 1;
-                    CECMSDbContext db = new CECMSDbContext();
+                    //CECMSDbContext db = new CECMSDbContext();
                     db.tblAccounts.Add(accItem);
                     db.SaveChanges();
                     tblNhanVien userItem = new tblNhanVien();
+                    var nhanvien = db.tblNhanViens.Where(x => x.MA_NHANVIEN.Equals(model.MA_NHANVIEN)).ToList();
+                    foreach (var itempb in nhanvien)
+                    {
+                        if (model.MA_NHANVIEN.Equals(itempb.MA_NHANVIEN))
+                        {
+                            ViewBag.Error = "Mã nhân viên đã tồn tại";
+                            return View();
+                        }
+                        
+                    }
                     userItem.Account_ID = accItem.ID;
                     userItem.MA_NHANVIEN = model.MA_NHANVIEN;
                     userItem.HO_TEN = model.HO_TEN;

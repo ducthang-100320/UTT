@@ -32,6 +32,20 @@ namespace UTTUniversity.Areas.Admin.Controllers
             if (ModelState.IsValid == true)
             {
                 db = new CECMSDbContext();
+                var phongban = db.tblPhongBans.Where(x => x.MA_PHONGBAN.Equals(model.MA_PHONGBAN) || x.TEN_PHONGBAN.Equals(model.TEN_PHONGBAN)).ToList();
+                foreach (var itempb in phongban)
+                {
+                    if (model.MA_PHONGBAN.Equals(itempb.MA_PHONGBAN))
+                    {
+                        ViewBag.Error = "Mã phòng ban đã tồn tại";
+                        return View();
+                    }
+                    else if (model.TEN_PHONGBAN.Equals(itempb.TEN_PHONGBAN))
+                    {
+                        ViewBag.ErrorName = "Tên phòng ban đã tồn tại";
+                        return View();
+                    }
+                }
                 db.tblPhongBans.Add(model);
                 var result = db.SaveChanges();
                 return RedirectToAction("Index", "PhongBan");
@@ -55,7 +69,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
         {
             db = new CECMSDbContext();
 
-
+            
             var item = db.tblPhongBans.Find(model.MA_PHONGBAN);
             item.MA_PHONGBAN = model.MA_PHONGBAN;
             item.TEN_PHONGBAN = model.TEN_PHONGBAN;
@@ -68,7 +82,7 @@ namespace UTTUniversity.Areas.Admin.Controllers
 
             if (Result >= 0)
             {
-                ModelState.AddModelError("success", "Cập nhật dữ liệu thành công");
+                ViewBag.Success = "Cập nhật dữ liệu thành công";
                 return RedirectToAction("Index", "PhongBan");
             }
             else

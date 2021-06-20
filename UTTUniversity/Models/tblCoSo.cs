@@ -31,6 +31,8 @@ namespace UTTUniversity.Models
         [Required]
         [StringLength(300)]
         public string EMAIL { get; set; }
+        
+        public int TRANG_THAI { get; set; }
 
         [StringLength(500)]
         public string GHI_CHU { get; set; }

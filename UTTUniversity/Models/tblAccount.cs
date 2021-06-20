@@ -1,4 +1,4 @@
-namespace UTTUniversity.Models
+﻿namespace UTTUniversity.Models
 {
     using System;
     using System.Collections.Generic;
@@ -11,11 +11,11 @@ namespace UTTUniversity.Models
     {
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Yêu cầu nhập tên đăng nhập")]
         [StringLength(50)]
         public string AccoutName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Yêu cầu nhập mật khẩu")]
         [StringLength(500)]
         public string Password { get; set; }
 
