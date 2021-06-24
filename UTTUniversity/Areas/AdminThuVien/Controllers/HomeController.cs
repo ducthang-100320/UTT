@@ -11,7 +11,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
     {
         CECMSDbContext db;
         // GET: Admin/Home
-        public ActionResult Index(/*int page = 1, int pageSize = 5*/ int id)
+        public ActionResult Index( int id)
         {
             
             db = new CECMSDbContext();
@@ -20,21 +20,54 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
             var model1 = db.tblNhanViens.Where(x => x.Account_ID == model.ID).FirstOrDefault();
             Session["user"] = model1;
-            //db = new TRUONGHOCDbContext();
-            //double totalRecord = db.tblSaches.Where(x => x.TRANG_THAI == 1).Count();
-            //ViewBag.Total = totalRecord;
-            //ViewBag.Page = page;
-            //int maxPage = 5 ;
-            //double totalPage = 0;
-            //totalPage = (double)Math.Ceiling(((decimal)(totalRecord / pageSize)));
-            //ViewBag.TotalPage = totalPage;
-            //ViewBag.MaxPage = maxPage;
-            //ViewBag.First = 1;
-            //ViewBag.Last = totalPage;
-            //ViewBag.Next = page + 1;
-            //ViewBag.Prev = page - 1;
-            //var model = db.tblSaches.Where(x => x.TRANG_THAI == 1).OrderByDescending(x=>x.ID).Skip((page -1)* pageSize).Take(pageSize).ToList(); 
-            return View(/*model*/);
+            
+            return View();
+        }
+
+        public JsonResult JGetChart1()
+        {
+            db = new CECMSDbContext();
+            int kho = db.tblChiTietPhieuNhaps.Sum(x => x.SO_LUONG );
+            int sach = db.tblSaches.Where(x => x.TRANG_THAI == 1).Sum(x => x.SO_LUONG);
+            var model = db.tblMuonTras.Where(x => x.TRANG_THAI == 1).ToList();
+            int muon = 0;
+            int quahan = 0;
+            foreach (var item in model)
+            {
+                if (item.GHI_CHU.Equals("Quá hạn"))
+                {
+                    quahan = quahan + item.SO_LUONG;
+                }
+                else if(item.GHI_CHU.Equals("Đang mượn"))
+                {
+                    muon = muon + item.SO_LUONG;
+                }
+            }
+            List<DataAmChart> result = new List<DataAmChart>();
+            DataAmChart dt1 = new DataAmChart();
+            dt1.country = "Kho sách";
+            dt1.litres = kho - sach - muon;
+            result.Add(dt1);
+            DataAmChart dt2 = new DataAmChart();
+            dt2.country = "Sách trên kệ";
+            dt2.litres =  sach;
+            result.Add(dt2);
+            DataAmChart dt3 = new DataAmChart();
+            dt3.country = "Đang mượn";
+            dt3.litres =  muon;
+            result.Add(dt3);
+            DataAmChart dt4 = new DataAmChart();
+            dt4.country = "Quá hạn";
+            dt4.litres = quahan;
+            result.Add(dt4);
+
+            return Json(new { data = result }, JsonRequestBehavior.AllowGet);
+        }
+        public class DataAmChart
+        {
+            public string country { get; set; }
+
+            public int litres { get; set; }
         }
     }
 }

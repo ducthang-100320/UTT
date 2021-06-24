@@ -1,0 +1,86 @@
+﻿@model UTTUniversity.Models.tblChiTietPhieuNhap
+
+@{
+    ViewBag.Title = "Sửa Chi Tiết Phiếu Nhập";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
+}
+@{
+    var chitiet = (List<UTTUniversity.Models.tblChiTietPhieuNhap>)ViewBag.chitietphieu;
+    var item = Session["Ma_Trung"] as UTTUniversity.Models.tblChiTietPhieuNhap;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div class="modal-content">
+        <div class="modal-header" style="background-color: dodgerblue">
+            <h5 class="modal-title" id="exampleModalLongTitle">Nhập sách</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        @using (Html.BeginForm("EditChiTietPhieuNhap", "NhapSach", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body table-border-style">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Mã phiếu nhập: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.MA_PHIEUNHAP, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.MA_PHIEUNHAP, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Tên sách: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.TEN_SACH, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TEN_SACH, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Số lượng: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.SO_LUONG, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.SO_LUONG, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Đơn giá: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.DON_GIA, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DON_GIA, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Tên thể loại: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.TEN_THELOAI, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TEN_THELOAI, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                   
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input type="submit" value="Ghi dữ liệu" class="btn btn-primary btn-sm" />
+                                    @Html.ActionLink("Quay lại", "ChiTietPhieuNhap",new {id = item.MA_PHIEUNHAP })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+</body>
+</html>

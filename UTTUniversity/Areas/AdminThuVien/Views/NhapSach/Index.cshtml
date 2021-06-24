@@ -1,27 +1,33 @@
 ﻿@model IEnumerable<UTTUniversity.Models.tblPhieuNhapSach>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý nhập sách";
     Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
 }
 @{
     int STT = 0;
-
+    var nhanvien = (List<UTTUniversity.Models.tblNhanVien>)ViewBag.nhanvien;
 }
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Danh mục đọc giả</h4>
+        <div class="row">
+            <div class="col-lg-4">
+                <h4 style="color:black">Danh mục phiếu nhập sách</h4>
+            </div>
+            <div class="col-lg-4">
+                <a href="@Url.Action("Create", "NhapSach")" style="float:left" class="btn btn-sm btn-primary btn-header">Thêm mới</a>
+            </div>
+        </div>
+
         <div class="table-responsive m-t-40">
             <table id="myTable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Mã đọc giả</th>
-                        <th>Tên đọc giả</th>
-                        <th>Mã thẻ</th>
-                        <th>Ngày sinh</th>
-                        @*<th>Loại</th>
-                        <th>Số điện thoại</th>*@
+                        <th>Mã phiếu nhập</th>
+                        <th>Tên nhân viên</th>
+                        <th>Nhà xuất bản</th>
+                        <th>Ngày nhập</th>
                         <th>Tùy chọn</th>
 
                     </tr>
@@ -39,7 +45,14 @@
                                 @Html.DisplayFor(modelItem => item.MA_PHIEU)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.MA_NHANVIEN)
+                                @foreach (var itemNv in nhanvien)
+                                {
+                                    if (item.MA_NHANVIEN == itemNv.MA_NHANVIEN)
+                                    {
+                                        @Html.DisplayFor(modelItem => itemNv.HO_TEN)
+                                    }
+                                }
+
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.MA_NXB)
@@ -47,29 +60,18 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.NGAY_NHAP)
                             </td>
+
+                           
                             <td>
-                                @*@foreach (var itemTloai in modelTheLoai)
-                                {
-                                    if (item.MA_LOAI == itemTloai.MA_LOAI)
-                                    {
-                                        @Html.DisplayFor(modelItem => itemTloai.TEN_LOAI)
-                                    }
-                                }*@
+
+                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "NhapSach", new { id = item.MA_PHIEU })">Sửa</a>
+
+                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("ChiTietPhieuNhap", "NhapSach",new { id = item.MA_PHIEU })" >Chi tiết</a>
+
+                                <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "NhapSach",new { id = item.MA_PHIEU })">Xóa</a>
+                                @*@Html.ActionLink("Delete", "Delete", new { id = item.RoleID })*@
 
                             </td>
-                            <td>
-                                @*@Html.DisplayFor(modelItem => item.SO_DTHOAI)*@
-                            </td>
-                            <td>
-
-                                    <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Edit", "DocGia", new { id = item.MA_PHIEU })">Edit</a>
-
-                                    <a class="btn btn-outline-info" style="float:right" href="#" onclick="createModal('@Url.Action("Details", "DocGia",new { id = item.MA_PHIEU })')">Details</a>
-
-                                    <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "DocGia",new { id = item.MA_PHIEU })">Delete</a>
-                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.RoleID })*@
-
-                                </td>
                         </tr>
                     }
 

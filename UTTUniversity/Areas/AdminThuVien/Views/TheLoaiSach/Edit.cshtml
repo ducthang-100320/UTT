@@ -24,14 +24,14 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Tên nhà xuất bản: <span class="label-required">*</span></label>
-                            @Html.EditorFor(model => model.MA_THELOAI, new { htmlAttributes = new { @class = "form-control" } })
+                            <label>Mã thể loại: <span class="label-required">*</span></label>
+                            @Html.EditorFor(model => model.MA_THELOAI, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                             @Html.ValidationMessageFor(model => model.MA_THELOAI, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Mã nhà xuất bản: <span class="label-required">*</span></label>
+                            <label>Tên thể loại: <span class="label-required">*</span></label>
                             @Html.EditorFor(model => model.TEN_THELOAI, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.TEN_THELOAI, "", new { @class = "text-danger" })
                         </div>

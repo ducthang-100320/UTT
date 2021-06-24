@@ -16,12 +16,12 @@ namespace UTTUniversity.Models
         public string MA_PHIEUNHAP { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string MA_SACH { get; set; }
+        [StringLength(100)]
+        public string TEN_SACH { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string MA_THELOAI { get; set; }
+        public string TEN_THELOAI { get; set; }
 
         public int SO_LUONG { get; set; }
 

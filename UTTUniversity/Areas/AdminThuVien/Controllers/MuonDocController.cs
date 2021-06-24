@@ -15,7 +15,20 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         {
             db = new CECMSDbContext();
             var model = db.tblMuonTras.Where(x => x.TRANG_THAI == 1).ToList();
-
+            DateTime today = DateTime.Now;
+            foreach (var item in model)
+            {
+                if(today.CompareTo(item.NGAY_TRA) == 1 || today.CompareTo(item.NGAY_TRA) == 0)
+                {
+                    item.GHI_CHU = item.GHI_CHU;
+                }
+                else
+                {
+                    item.GHI_CHU = "Quá hạn";
+                    
+                }
+            }
+            db.SaveChanges();
             var sach = db.tblSaches.Where(x => x.TRANG_THAI == 1);
             Session["sach"] = sach;
             return View(model);
@@ -345,37 +358,55 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 ModelState.AddModelError("", "Mã sách này đã hết");
                 return View();
             }
+            if (model.NGAY_MUON.CompareTo(model.NGAY_TRA) == 1)
+            {
+                ModelState.AddModelError("", "Ngày trả phải lớn hơn ngày mượn");
+                return View();
+            }
+            if (muontra_edit.GHI_CHU.Equals("Đặt trước"))
+            {
+                sach.SO_LUONG = sach.SO_LUONG ;
+                
+            }
+            else if(muontra_edit.GHI_CHU.Equals("Đang mược") || muontra_edit.GHI_CHU.Equals("Quá hạn"))
+            {
+                sach.SO_LUONG = sach.SO_LUONG + muontra_edit.SO_LUONG;
+            }
+            else
+            {
+                sach.SO_LUONG = sach.SO_LUONG;
+            }
 
-            if (model.SO_LUONG > (sach.SO_LUONG+muontra_edit.SO_LUONG ))
+            if (model.SO_LUONG > sach.SO_LUONG)
             {
                 ModelState.AddModelError("", "Số lượng sách không đủ");
                 return View();
             }
             else
             {
-                sach.SO_LUONG = sach.SO_LUONG + muontra_edit.SO_LUONG - model.SO_LUONG;
+                sach.SO_LUONG = sach.SO_LUONG - model.SO_LUONG;
                 
             }
-            if (model.NGAY_MUON.CompareTo(model.NGAY_TRA) == 1 )
+
+            if ((collection["customRadio"].ToString().Equals("Đã trả") && muontra_edit.GHI_CHU.Equals("Đang mượn"))||
+                (collection["customRadio"].ToString().Equals("Đã trả") && muontra_edit.GHI_CHU.Equals("Quá hạn"))
+                )
             {
-                ModelState.AddModelError("", "Ngày trả phải lớn hơn ngày mượn");
-                return View();
-            }
-           
-            if(collection["customRadio"].ToString().Equals("Đã trả") && muontra_edit.GHI_CHU.Equals("Đã trả"))
-            {
-                sach.SO_LUONG = sach.SO_LUONG;
+                sach.SO_LUONG = sach.SO_LUONG +muontra_edit.SO_LUONG ;
+                muontra_edit.NGAY_TRA = DateTime.Now;
             }
             else
             {
-                sach.SO_LUONG = sach.SO_LUONG + muontra_edit.SO_LUONG;
+                sach.SO_LUONG = sach.SO_LUONG ;
+                muontra_edit.NGAY_TRA = model.NGAY_TRA;
+
             }
             muontra_edit.GHI_CHU = collection["customRadio"].ToString();
             muontra_edit.SO_LUONG = model.SO_LUONG;
             muontra_edit.MA_DOCGIA = model.MA_DOCGIA;
             muontra_edit.MA_SACH = model.MA_SACH;
             muontra_edit.NGAY_MUON = model.NGAY_MUON;
-            muontra_edit.NGAY_TRA = model.NGAY_TRA;
+            
             db.SaveChanges();
 
             return RedirectToAction("IndexMuonTra", "MuonDoc");

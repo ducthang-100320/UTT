@@ -20,12 +20,18 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         }
         public ActionResult Create()
         {
-            return View();
+            db = new CECMSDbContext();
+            int STT = db.tblTacGias.Count();
+            STT++;
+            var model = new tblTacGia();
+            model.MA_TACGIA = "TG00" + STT;
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Create(tblTacGia model, HttpPostedFile filePost, FormCollection collection)
         {
+
             string fileLocation = "";
             if (Request.Files["filePost"].ContentLength <= 0) { model.IMAGE = ""; }
             ModelState["filePost"].Errors.Clear();
@@ -52,22 +58,25 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 model.GIOI_TINH = 0;
             }
             db = new CECMSDbContext();
+            int STT = db.tblTacGias.Count();
+            STT++;
+            model.MA_TACGIA = "TG00" + STT;
             model.TRANG_THAI = 1;
             int iContent = fileLocation.IndexOf("Content");
             if (iContent > 0)
             {
                 model.IMAGE = @"\" + fileLocation.Substring(iContent, fileLocation.Length - iContent);
             }
-            var item = db.tblTacGias.Where(x => x.TRANG_THAI == 1).ToList();
-            foreach (var itemTG in item)
-            {
-                if (model.MA_TACGIA == itemTG.MA_TACGIA)
-                {
-                    ModelState.AddModelError("", "Mã đã tồn tại");
-                    break;
-                }
+            //var item = db.tblTacGias.Where(x => x.TRANG_THAI == 1).ToList();
+            //foreach (var itemTG in item)
+            //{
+            //    if (model.MA_TACGIA == itemTG.MA_TACGIA)
+            //    {
+            //        ModelState.AddModelError("", "Mã đã tồn tại");
+            //        break;
+            //    }
 
-            }
+            //}
 
             if (ModelState.IsValid)
             {
@@ -95,15 +104,17 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
             db = new CECMSDbContext();
             var model = db.tblTacGias.Find(id);
+            Session["Ma_Trung"] = model;
             return View(model);
         }
         [HttpPost]
         public ActionResult Edit(tblTacGia model, HttpPostedFile filePost, FormCollection collection)
         {
             db = new CECMSDbContext();
-            var item = db.tblTacGias.Find(model.MA_TACGIA);
+            var TG = Session["Ma_Trung"] as UTTUniversity.Models.tblTacGia;
+            var item = db.tblTacGias.Find(TG.MA_TACGIA);
             item.TEN_TACGIA = model.TEN_TACGIA;
-            item.MA_TACGIA = model.MA_TACGIA;
+            item.MA_TACGIA = TG.MA_TACGIA;
             item.MO_TA = model.MO_TA;
             item.NGAYSINH = model.NGAYSINH;
             string fileLocation = "";
@@ -137,16 +148,16 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
                 item.GIOI_TINH = 0;
             }
 
-            var itemnxb = db.tblTacGias.Where(x => x.TRANG_THAI == 1 && x.MA_TACGIA != model.MA_TACGIA).ToList();
-            foreach (var itemTG in itemnxb)
-            {
-                if (item.MA_TACGIA == itemTG.MA_TACGIA)
-                {
-                    ModelState.AddModelError("", "Mã đã tồn tại");
-                    break;
-                }
+            //var itemnxb = db.tblTacGias.Where(x => x.TRANG_THAI == 1 && x.MA_TACGIA != model.MA_TACGIA).ToList();
+            //foreach (var itemTG in itemnxb)
+            //{
+            //    if (item.MA_TACGIA == itemTG.MA_TACGIA)
+            //    {
+            //        ModelState.AddModelError("", "Mã đã tồn tại");
+            //        break;
+            //    }
 
-            }
+            //}
 
             if (ModelState.IsValid)
             {

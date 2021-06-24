@@ -1,0 +1,163 @@
+﻿@model UTTUniversity.Models.tblChiTietPhieuNhap
+
+@{
+    ViewBag.Title = "Chi Tiết Phiếu Nhập";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
+}
+@{ 
+    var chitiet = (List<UTTUniversity.Models.tblChiTietPhieuNhap>)ViewBag.chitietphieu;
+    int STT = 0;
+    
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <div class="modal-content">
+        <div class="modal-header" style="background-color: dodgerblue">
+            <h5 class="modal-title" id="exampleModalLongTitle">Nhập sách</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        @using (Html.BeginForm("ChiTietPhieuNhap", "NhapSach", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body table-border-style">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Mã phiếu nhập: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.MA_PHIEUNHAP, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.MA_PHIEUNHAP, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Tên sách: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.TEN_SACH, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TEN_SACH, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Số lượng: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.SO_LUONG, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.SO_LUONG, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Đơn giá: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.DON_GIA, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DON_GIA, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Tên thể loại: <span class="label-required">*</span></label>
+                                        @Html.EditorFor(model => model.TEN_THELOAI, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TEN_THELOAI, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input type="submit" value="Ghi dữ liệu" class="btn btn-primary btn-sm" />
+                                    @Html.ActionLink("Quay lại", "Index")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h4>Chi tiết phiếu nhập</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã phiếu nhập</th>
+                                        <th>Tên sách</th>
+                                        <th>Thể loại</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                        <th>Thao Tác</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in chitiet)
+                                    {
+                                        STT = STT + 1;
+                                    <tr>
+                                        <td>
+                                            @STT
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MA_PHIEUNHAP)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TEN_SACH)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TEN_THELOAI)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SO_LUONG)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DON_GIA)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.THANH_TIEN)
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <a class="btn btn-outline-info" style="float:right" href="@Url.Action("EditChiTietPhieuNhap", "NhapSach", new { id = item.ID })">Edit</a>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a class="btn btn-outline-info" style="float:right" href="@Url.Action("Delete", "NhapSach",new { id = item.MA_PHIEUNHAP })">Delete</a>
+                                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.RoleID })*@
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

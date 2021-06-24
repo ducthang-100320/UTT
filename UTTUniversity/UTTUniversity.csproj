@@ -133,6 +133,7 @@
     <Compile Include="Areas\AdminThuVien\Controllers\BookController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\DocGiaController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminThuVien\Controllers\KhoSachController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\LoginController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\MuonDocController.cs" />
     <Compile Include="Areas\AdminThuVien\Controllers\NhapSachController.cs" />
@@ -156,6 +157,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CECMSDbContext.cs" />
+    <Compile Include="Models\KhoSach.cs" />
     <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\tblAccount.cs" />
     <Compile Include="Models\tblAccountNhanVien.cs" />
@@ -3333,6 +3335,11 @@
     <Content Include="Areas\AdminThuVien\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminThuVien\Views\MuonDoc\Edit.cshtml" />
     <Content Include="Areas\AdminThuVien\Views\NhapSach\Index.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NhapSach\Create.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NhapSach\ChiTietPhieuNhap.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NhapSach\Edit.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\NhapSach\EditChiTietPhieuNhap.cshtml" />
+    <Content Include="Areas\AdminThuVien\Views\KhoSach\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<UTTUniversity.Models.KhoSach>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminThuVien/Views/Shared/_Layout.cshtml";
+
+}
+
+
+@foreach (var item in Model)
+{
+    <h2>@item.SO_LUONG</h2>
+}

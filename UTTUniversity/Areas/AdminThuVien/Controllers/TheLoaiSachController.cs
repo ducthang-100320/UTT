@@ -81,8 +81,9 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
         public ActionResult Edit(tblTheLoaiSach model, FormCollection collection)
         {
             db = new CECMSDbContext();
-            var item = db.tblTheLoaiSaches.Find(model.MA_THELOAI);
             var Tloai = Session["Ma_Trung"] as UTTUniversity.Models.tblTheLoaiSach;
+            var item = db.tblTheLoaiSaches.Find(Tloai.MA_THELOAI);
+           
             item.TEN_THELOAI = model.TEN_THELOAI;
             item.MA_THELOAI = Tloai.MA_THELOAI;
 
