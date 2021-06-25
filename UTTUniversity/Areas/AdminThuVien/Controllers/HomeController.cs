@@ -20,14 +20,17 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
             var model1 = db.tblNhanViens.Where(x => x.Account_ID == model.ID).FirstOrDefault();
             Session["user"] = model1;
-            
+
+            var model2 = db.tblTheLoaiSaches.Where(x => x.TRANG_THAI == 1);
+            Session["The_Loai_Sach"] = model2;
+
             return View();
         }
 
         public JsonResult JGetChart1()
         {
             db = new CECMSDbContext();
-            int kho = db.tblChiTietPhieuNhaps.Sum(x => x.SO_LUONG );
+            int kho = db.tblChiTietPhieuNhaps.Where(x => x.TRANG_THAI == 1).Sum(x => x.SO_LUONG );
             int sach = db.tblSaches.Where(x => x.TRANG_THAI == 1).Sum(x => x.SO_LUONG);
             var model = db.tblMuonTras.Where(x => x.TRANG_THAI == 1).ToList();
             int muon = 0;

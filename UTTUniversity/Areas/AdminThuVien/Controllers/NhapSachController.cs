@@ -129,5 +129,10 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             db.SaveChanges();
             return RedirectToAction("ChiTietPhieuNhap","NhapSach",new { id = model1.MA_PHIEUNHAP });
         }
+
+        public ActionResult DeletePhieuNhap(string id)
+        {
+            return View();
+        }
     }
 }

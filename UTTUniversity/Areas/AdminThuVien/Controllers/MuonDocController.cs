@@ -18,14 +18,15 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
             DateTime today = DateTime.Now;
             foreach (var item in model)
             {
-                if(today.CompareTo(item.NGAY_TRA) == 1 || today.CompareTo(item.NGAY_TRA) == 0)
+                if(today.CompareTo(item.NGAY_TRA) == 1 )
                 {
-                    item.GHI_CHU = item.GHI_CHU;
+                    item.GHI_CHU = "Quá hạn";
+                   
                 }
                 else
                 {
-                    item.GHI_CHU = "Quá hạn";
-                    
+                    item.GHI_CHU = item.GHI_CHU;
+
                 }
             }
             db.SaveChanges();
@@ -168,7 +169,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
                 var sinhvien = db.tblSinhViens.Where(x => x.TINH_TRANG == 1).ToList();
 
-                var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV001")).ToList();
+                var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV01")).ToList();
 
                 var loai = db.tblLoaiDocGias.Where(x => x.TRANG_THAI == 1);
                 Session["loai"] = loai;
@@ -291,7 +292,7 @@ namespace UTTUniversity.Areas.AdminThuVien.Controllers
 
             var sinhvien = db.tblSinhViens.Where(x => x.TINH_TRANG == 1).ToList();
 
-            var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV001")).ToList();
+            var giangvien = db.tblNhanViens.Where(x => x.MA_CHUCVU.Contains("CV01")).ToList();
 
             var loai = db.tblLoaiDocGias.Where(x => x.TRANG_THAI == 1);
             Session["loai"] = loai;
